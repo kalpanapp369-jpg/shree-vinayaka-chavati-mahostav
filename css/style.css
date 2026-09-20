@@ -1,0 +1,1366 @@
+/* ==========================================================================
+   Ganesh Chaturthi Sacred Web Game Suite - Master Design System
+   Aesthetic Peach & Calm Warmth Theme (ప్రశాంత దివ్య శోభ)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Outfit:wght@400;500;600;700;800&family=Rozha+One&family=Tiro+Telugu&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+    /* Aesthetic Peach & Calm Pastel Palette */
+    --color-peach-light: #fff5f0;
+    --color-peach-soft: #ffe8dc;
+    --color-peach: #fcd5c0;
+    --color-peach-blush: #f8c2a8;
+    --color-terracotta: #e29578;
+    --color-terracotta-dark: #c57d56;
+    --color-rose-gold: #b06d48;
+    --color-gold-warm: #d4a373;
+    --color-gold-soft: #faedcd;
+    
+    /* Contrast & Typography Colors */
+    --color-cocoa: #341e15;
+    --color-cocoa-light: #5c3a2b;
+    --color-text-muted: #7d5a4a;
+    --color-card-bg: rgba(255, 255, 255, 0.82);
+    --color-card-glass: rgba(255, 248, 243, 0.94);
+    --color-sand: #fefae0;
+    --color-sage: #88a892;
+    
+    --font-heading: 'Cinzel Decorative', 'Tiro Telugu', cursive, serif;
+    --font-accent: 'Rozha One', 'Tiro Telugu', serif;
+    --font-body: 'Plus Jakarta Sans', 'Outfit', 'Tiro Telugu', -apple-system, sans-serif;
+    
+    --shadow-soft: 0 10px 30px rgba(226, 149, 120, 0.15), 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-card: 0 14px 38px rgba(197, 125, 86, 0.18), 0 4px 12px rgba(0, 0, 0, 0.05);
+    --shadow-card-hover: 0 22px 50px rgba(197, 125, 86, 0.28), 0 0 25px rgba(252, 213, 192, 0.7);
+    --border-peach: 1.5px solid rgba(226, 149, 120, 0.4);
+    --border-peach-glow: 2px solid rgba(197, 125, 86, 0.85);
+    --radius-sm: 10px;
+    --radius-md: 18px;
+    --radius-lg: 26px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: #fdf7ed;
+    background-image: 
+        radial-gradient(circle at 50% 0%, rgba(255, 248, 238, 0.95) 0%, transparent 60%),
+        radial-gradient(circle at 10% 20%, rgba(254, 237, 218, 0.8) 0%, transparent 50%),
+        radial-gradient(circle at 90% 20%, rgba(254, 237, 218, 0.8) 0%, transparent 50%),
+        radial-gradient(circle at 50% 90%, rgba(248, 222, 196, 0.5) 0%, transparent 60%),
+        linear-gradient(180deg, #fffdf8 0%, #fdf6ec 40%, #faecd8 100%);
+    color: var(--color-cocoa);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Subtle Golden Header Baseline */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #c57d56 0%, #d4a373 25%, #fcd5c0 50%, #d4a373 75%, #c57d56 100%);
+    box-shadow: 0 0 10px rgba(212, 163, 115, 0.6);
+    z-index: 1000;
+}
+
+/* ==========================================================================
+   Master Realistic Festive Background & Atmospheric Layer
+   ========================================================================== */
+.festive-decorations-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    overflow: hidden;
+}
+
+/* 1. Side Temple Gopuram Line Art Watermarks */
+.temple-watermark {
+    position: absolute;
+    top: 15%;
+    width: 280px;
+    max-height: 650px;
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 1;
+    filter: drop-shadow(0 0 4px rgba(212, 163, 115, 0.3));
+}
+
+.temple-watermark-left {
+    left: -20px;
+}
+
+.temple-watermark-right {
+    right: -20px;
+    transform: scaleX(-1);
+}
+
+.watermark-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 2. Bottom Center Golden Mandala / Rangoli Watermark */
+.mandala-watermark-center {
+    position: absolute;
+    bottom: -180px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 620px;
+    max-width: 90vw;
+    opacity: 0.22;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.mandala-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    animation: slowMandalaRotate 120s linear infinite;
+}
+
+@keyframes slowMandalaRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 3. Top Corner Realistic Mango Leaves & Hanging Brass Bell */
+.decor-corner {
+    position: absolute;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.top-left-garland {
+    top: -6px;
+    left: -6px;
+    width: 250px;
+    max-width: 22vw;
+    transform-origin: top left;
+    animation: cornerSwayLeft 5s ease-in-out infinite alternate;
+}
+
+.top-right-garland {
+    top: -6px;
+    right: -6px;
+    width: 250px;
+    max-width: 22vw;
+    transform-origin: top right;
+    animation: cornerSwayRight 5s ease-in-out infinite alternate;
+}
+
+.garland-bell-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: none;
+    outline: none;
+    background: transparent;
+    filter: drop-shadow(0 4px 10px rgba(52, 30, 21, 0.15));
+}
+
+@keyframes cornerSwayLeft {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(1.8deg); }
+}
+
+@keyframes cornerSwayRight {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-1.8deg); }
+}
+
+/* 4. Bottom Corner Glowing Brass Diya & Pink Lotus */
+.bottom-left-diya {
+    bottom: -6px;
+    left: -6px;
+    width: 260px;
+    max-width: 24vw;
+}
+
+.bottom-right-diya {
+    bottom: -6px;
+    right: -6px;
+    width: 260px;
+    max-width: 24vw;
+}
+
+.diya-lotus-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: none;
+    outline: none;
+    background: transparent;
+    filter: drop-shadow(0 0 12px rgba(255, 152, 0, 0.35)) drop-shadow(0 3px 8px rgba(52, 30, 21, 0.15));
+}
+
+/* Ambient Floating Particles Layer (Soft Peach Petals) */
+#ambient-particles-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.ambient-floating-petal {
+    position: absolute;
+    width: 10px;
+    height: 16px;
+    background: linear-gradient(135deg, rgba(226, 149, 120, 0.6), rgba(252, 213, 192, 0.8));
+    border-radius: 50% 50% 50% 0;
+    opacity: 0.45;
+    filter: drop-shadow(0 2px 6px rgba(226, 149, 120, 0.3));
+    animation: floatPetal linear infinite;
+}
+
+@keyframes floatPetal {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+    20% { opacity: 0.55; }
+    80% { opacity: 0.55; }
+    100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+}
+
+/* ==========================================================================
+   Global Top Navigation Bar
+   ========================================================================== */
+.global-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 36px 12px;
+    background: rgba(255, 252, 248, 0.95);
+    backdrop-filter: blur(14px);
+    border-bottom: 1.5px solid rgba(212, 163, 115, 0.5);
+    box-shadow: 0 4px 16px rgba(197, 125, 86, 0.08);
+}
+
+.header-temple-watermark {
+    position: absolute;
+    left: 50%;
+    top: -15px;
+    transform: translateX(-50%);
+    width: 120px;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.header-watermark-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.header-divider-lotus {
+    position: absolute;
+    bottom: -11px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fdf7ed;
+    padding: 0 8px;
+    font-size: 15px;
+    color: #d4a373;
+    line-height: 1;
+    z-index: 10;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    z-index: 2;
+}
+
+.header-brand:hover {
+    transform: scale(1.02);
+}
+
+.header-om-icon {
+    font-size: 34px;
+    color: #78161a;
+    font-family: 'Tiro Telugu', 'Georgia', serif;
+    text-shadow: 0 0 10px rgba(212, 163, 115, 0.6);
+    animation: omPulse 3s ease-in-out infinite;
+}
+
+@keyframes omPulse {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px #d4a373); }
+    50% { transform: scale(1.08); filter: drop-shadow(0 0 10px #78161a); }
+}
+
+.header-title-group h1 {
+    font-family: 'Rozha One', 'Tiro Telugu', serif;
+    font-size: 1.35rem;
+    letter-spacing: 0.5px;
+    color: #78161a;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.header-title-group p {
+    font-size: 0.8rem;
+    color: #7a5238;
+    letter-spacing: 0.4px;
+    font-weight: 600;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 2;
+}
+
+/* Base Pill Buttons in Header */
+.btn-icon-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 16px;
+    background: #ffffff;
+    border: 1.5px solid rgba(212, 163, 115, 0.75);
+    border-radius: 24px;
+    color: #341e15;
+    font-family: var(--font-body);
+    font-size: 0.86rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(197, 125, 86, 0.1);
+    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-icon-text:hover {
+    background: #fffdfa;
+    border-color: #78161a;
+    color: #78161a;
+    box-shadow: 0 4px 12px rgba(120, 22, 26, 0.2);
+    transform: translateY(-2px);
+}
+
+.btn-icon-text:active {
+    transform: translateY(1px);
+}
+
+.btn-icon-text.active {
+    background: #78161a;
+    color: #ffffff;
+    border-color: #78161a;
+    box-shadow: 0 4px 12px rgba(120, 22, 26, 0.35);
+}
+
+/* Primary Divine Action Buttons (Calm Peach & Warm Terracotta) */
+.btn-primary-divine {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #e29578 0%, #c57d56 60%, #b06d48 100%);
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    border-radius: var(--radius-md);
+    color: #ffffff;
+    font-family: var(--font-accent);
+    font-size: 1.15rem;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    box-shadow: 0 6px 22px rgba(197, 125, 86, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary-divine:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(197, 125, 86, 0.5), 0 0 20px rgba(252, 213, 192, 0.7);
+    border-color: #ffffff;
+}
+
+.btn-primary-divine:active {
+    transform: translateY(1px);
+}
+
+.btn-primary-divine::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 40%;
+    height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+    transform: rotate(30deg);
+    animation: shineSweep 3.5s infinite ease-in-out;
+}
+
+@keyframes shineSweep {
+    0%, 70% { left: -60%; }
+    100% { left: 140%; }
+}
+
+.btn-secondary-divine {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 22px;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1.5px solid rgba(226, 149, 120, 0.4);
+    border-radius: var(--radius-md);
+    color: var(--color-cocoa);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(226, 149, 120, 0.12);
+    transition: all 0.25s ease;
+}
+
+.btn-secondary-divine:hover {
+    background: #ffffff;
+    border-color: var(--color-terracotta);
+    color: var(--color-terracotta-dark);
+    box-shadow: 0 6px 18px rgba(226, 149, 120, 0.22);
+    transform: translateY(-2px);
+}
+
+/* Screen Wrapper & Routing */
+.app-screens-container {
+    position: relative;
+    width: 100%;
+    min-height: calc(100vh - 65px);
+    z-index: 2;
+}
+
+.app-screens-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle, rgba(226, 149, 120, 0.07) 1px, transparent 1px),
+                      radial-gradient(circle, rgba(248, 194, 168, 0.05) 1px, transparent 1px);
+    background-size: 36px 36px, 72px 72px;
+    background-position: 0 0, 18px 18px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.game-screen {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.game-screen.active-screen {
+    display: block;
+    opacity: 1;
+    animation: screenFadeIn 0.4s ease-out forwards;
+}
+
+@keyframes screenFadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   START SCREEN / MAIN MENU (Aesthetic Peach Hero)
+   ========================================================================== */
+.menu-hero-section {
+    text-align: center;
+    padding: 30px 10px 38px;
+}
+
+.divine-kalash-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 22px;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1.5px solid rgba(226, 149, 120, 0.45);
+    border-radius: 50px;
+    font-size: 0.92rem;
+    color: var(--color-terracotta-dark);
+    font-weight: 700;
+    margin-bottom: 16px;
+    box-shadow: 0 3px 12px rgba(226, 149, 120, 0.15);
+}
+
+.menu-hero-title {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    line-height: 1.2;
+    background: linear-gradient(135deg, #341e15 0%, #c57d56 45%, #e29578 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 2px 8px rgba(226, 149, 120, 0.25));
+}
+
+.menu-hero-subtitle {
+    font-family: var(--font-accent);
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    max-width: 720px;
+    margin: 0 auto 30px;
+    line-height: 1.5;
+}
+
+/* 3 Main Game Cards Grid */
+.game-modes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 28px;
+    margin-bottom: 45px;
+}
+
+.game-mode-card {
+    background: rgba(255, 255, 255, 0.82);
+    border: 1.5px solid rgba(226, 149, 120, 0.38);
+    border-radius: var(--radius-lg);
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    backdrop-filter: blur(14px);
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.game-mode-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #e29578, #fcd5c0, #d4a373, #88a892);
+}
+
+.game-mode-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(252, 213, 192, 0.25) 0%, transparent 60%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.game-mode-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    background: rgba(255, 255, 255, 0.95);
+    border-color: var(--color-terracotta);
+    box-shadow: var(--shadow-card-hover);
+}
+
+.game-mode-card:hover::after {
+    opacity: 1;
+}
+
+.gmc-badge {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: rgba(255, 248, 244, 0.92);
+    border: 1.5px solid var(--color-terracotta);
+    color: var(--color-terracotta-dark);
+    font-size: 0.78rem;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(226, 149, 120, 0.2);
+    z-index: 5;
+}
+
+.gmc-banner-img-wrap {
+    position: relative;
+    width: 100%;
+    height: 165px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 18px;
+    border: 1.5px solid rgba(226, 149, 120, 0.35);
+    box-shadow: 0 6px 18px rgba(197, 125, 86, 0.15);
+}
+
+.gmc-banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.45s ease;
+}
+
+.game-mode-card:hover .gmc-banner-img {
+    transform: scale(1.08);
+}
+
+.gmc-icon-pill {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--color-terracotta);
+    color: var(--color-cocoa);
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gmc-title {
+    font-family: var(--font-heading);
+    font-size: 1.45rem;
+    color: var(--color-cocoa);
+    margin-bottom: 10px;
+}
+
+.gmc-desc {
+    font-size: 0.94rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 22px;
+    flex-grow: 1;
+}
+
+.gmc-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1.5px solid rgba(226, 149, 120, 0.2);
+    padding-top: 18px;
+}
+
+.gmc-progress-tag {
+    font-size: 0.88rem;
+    color: var(--color-terracotta-dark);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Global Festival Progress Bar in Menu */
+.festival-summary-bar {
+    background: rgba(255, 255, 255, 0.82);
+    border: 1.5px solid rgba(226, 149, 120, 0.38);
+    border-radius: var(--radius-md);
+    padding: 22px 28px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 24px;
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-soft);
+    margin-bottom: 35px;
+    position: relative;
+}
+
+.festival-summary-bar::before {
+    content: '🪔';
+    position: absolute;
+    left: 14px;
+    top: -14px;
+    font-size: 20px;
+    filter: drop-shadow(0 2px 6px rgba(226, 149, 120, 0.5));
+}
+
+.festival-summary-bar::after {
+    content: '🪔';
+    position: absolute;
+    right: 14px;
+    top: -14px;
+    font-size: 20px;
+    filter: drop-shadow(0 2px 6px rgba(226, 149, 120, 0.5));
+}
+
+.fsb-stat-item {
+    text-align: center;
+}
+
+.fsb-stat-item .stat-label {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 600;
+}
+
+.fsb-stat-item .stat-value {
+    font-family: var(--font-accent);
+    font-size: 1.45rem;
+    color: var(--color-terracotta-dark);
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   MODALS (Peach Glassmorphism Dialogs)
+   ========================================================================== */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(52, 30, 21, 0.45);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-dialog {
+    background: rgba(255, 248, 244, 0.96);
+    border: 2px solid rgba(226, 149, 120, 0.5);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 60px rgba(52, 30, 21, 0.25), 0 0 35px rgba(252, 213, 192, 0.6);
+    max-width: 650px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    padding: 34px;
+    animation: modalSlideUp 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    color: var(--color-cocoa);
+}
+
+@keyframes modalSlideUp {
+    from { transform: scale(0.9) translateY(20px); }
+    to { transform: scale(1) translateY(0); }
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    background: rgba(226, 149, 120, 0.2);
+    border: 1px solid var(--color-terracotta);
+    color: var(--color-cocoa);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+    background: var(--color-terracotta);
+    color: #ffffff;
+    transform: rotate(90deg);
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.modal-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--color-cocoa);
+    margin-bottom: 8px;
+}
+
+.modal-blessing-quote {
+    font-family: var(--font-accent);
+    font-size: 1.15rem;
+    color: var(--color-terracotta-dark);
+    margin-top: 12px;
+    padding: 10px;
+    background: rgba(252, 213, 192, 0.35);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--color-terracotta);
+}
+
+.modal-decision-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+/* 500 Levels Selector Tab & Grid */
+.ls-tabs-container {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    background: rgba(252, 213, 192, 0.4);
+    padding: 4px;
+    border-radius: var(--radius-sm);
+}
+
+.ls-tab-btn {
+    flex: 1;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: var(--color-text-muted);
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ls-tab-btn.active {
+    background: #ffffff;
+    color: var(--color-cocoa);
+    box-shadow: 0 2px 8px rgba(197, 125, 86, 0.2);
+    font-weight: 700;
+}
+
+.ls-search-bar {
+    width: 100%;
+    padding: 12px 18px;
+    background: #ffffff;
+    border: 1.5px solid rgba(226, 149, 120, 0.4);
+    border-radius: var(--radius-sm);
+    color: var(--color-cocoa);
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+    outline: none;
+}
+
+.ls-search-bar:focus {
+    border-color: var(--color-terracotta);
+    box-shadow: 0 0 12px rgba(226, 149, 120, 0.3);
+}
+
+/* Modal Wide Sizing for 500 Level Road Map */
+.modal-dialog-wide {
+    max-width: 680px;
+    width: 95%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.ls-modal-header {
+    margin-bottom: 12px;
+}
+
+.ls-header-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.ls-view-toggle {
+    display: flex;
+    background: rgba(252, 213, 192, 0.5);
+    padding: 3px;
+    border-radius: 20px;
+    border: 1px solid rgba(226, 149, 120, 0.4);
+}
+
+.btn-ls-toggle {
+    padding: 5px 14px;
+    border: none;
+    border-radius: 16px;
+    background: transparent;
+    color: var(--color-cocoa-light);
+    font-size: 0.84rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-ls-toggle.active {
+    background: #ffffff;
+    color: var(--color-terracotta-dark);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.ls-subtext {
+    font-size: 0.88rem;
+    color: #9a3412;
+    font-weight: 700;
+    margin-top: 4px;
+    margin-bottom: 6px;
+}
+
+.ls-controls-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.ls-search-bar {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.btn-jump-current {
+    padding: 0 16px;
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+    color: #ffffff;
+    border: 1.5px solid #ffedd5;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(234, 88, 12, 0.3);
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+.btn-jump-current:hover {
+    transform: scale(1.03);
+    filter: brightness(1.1);
+}
+
+/* ==========================================================================
+   CANDY CRUSH STYLE SERPENTINE ROAD MAP
+   ========================================================================== */
+.candy-road-map-container {
+    position: relative;
+    width: 100%;
+    height: 58vh;
+    min-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: radial-gradient(circle at 50% 10%, #fff7ed 0%, #ffedd5 40%, #fed7aa 100%);
+    border: 2px solid rgba(226, 149, 120, 0.5);
+    border-radius: var(--radius-md);
+    box-shadow: inset 0 4px 20px rgba(154, 52, 18, 0.12);
+    scroll-behavior: smooth;
+    padding-bottom: 60px;
+}
+
+.candy-road-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.candy-road-nodes-wrapper {
+    position: relative;
+    width: 100%;
+    z-index: 3;
+}
+
+/* Individual Level Node on Road Map */
+.candy-road-node {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 130px;
+    text-align: center;
+}
+
+.candy-road-node:hover {
+    transform: translate(-50%, -54%) scale(1.08);
+    z-index: 10;
+}
+
+/* 3D Round Node Pin */
+.node-circle-btn {
+    position: relative;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Impact', 'Arial Black', sans-serif;
+    font-size: 1.5rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.7);
+    transition: all 0.25s ease;
+}
+
+/* Node States */
+/* 1. Completed Node (Unlocked & Replayable!) */
+.candy-road-node.completed .node-circle-btn {
+    background: linear-gradient(180deg, #fef08a 0%, #f59e0b 50%, #d97706 100%);
+    border: 3.5px solid #fffbeb;
+    color: #78350f;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 6px 18px rgba(217, 119, 6, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+}
+
+/* 2. Current Active Node (Play Now!) */
+.candy-road-node.current .node-circle-btn {
+    background: linear-gradient(180deg, #86efac 0%, #22c55e 55%, #15803d 100%);
+    border: 4px solid #ffffff;
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 25px rgba(34, 197, 94, 0.9), 0 8px 20px rgba(21, 128, 61, 0.6);
+    animation: currentNodePulse 1.8s infinite alternate ease-in-out;
+}
+
+@keyframes currentNodePulse {
+    0% { transform: scale(1); box-shadow: 0 0 14px rgba(34, 197, 94, 0.7); }
+    100% { transform: scale(1.12); box-shadow: 0 0 32px rgba(34, 197, 94, 1), 0 0 45px rgba(250, 204, 21, 0.6); }
+}
+
+/* Floating Avatar Pin above Current Node */
+.current-avatar-pin {
+    position: absolute;
+    top: -46px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+    animation: avatarBob 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes avatarBob {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-7px); }
+}
+
+.cap-emoji {
+    font-size: 1.8rem;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+.cap-label {
+    background: linear-gradient(90deg, #ef4444, #f97316);
+    color: #ffffff;
+    font-size: 0.68rem;
+    font-weight: 900;
+    padding: 2px 8px;
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+}
+
+/* 3. Locked Node */
+.candy-road-node.locked {
+    cursor: not-allowed;
+    filter: grayscale(0.7) opacity(0.72);
+}
+
+.candy-road-node.locked .node-circle-btn {
+    background: linear-gradient(180deg, #e5e7eb 0%, #9ca3af 100%);
+    border: 2.5px solid #6b7280;
+    color: #4b5563;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.node-lock-icon {
+    font-size: 1.3rem;
+}
+
+/* Node Info Card under circle */
+.node-info-card {
+    margin-top: 5px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(226, 149, 120, 0.4);
+    border-radius: 12px;
+    padding: 3px 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(4px);
+    max-width: 125px;
+}
+
+.nic-title {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #431407;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nic-badge {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #d97706;
+}
+
+.nic-badge.active-badge {
+    color: #16a34a;
+}
+
+.nic-badge.locked-badge {
+    color: #6b7280;
+}
+
+/* Milestone Grand Archway */
+.milestone-arch {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, #9a3412 0%, #c2410c 50%, #9a3412 100%);
+    color: #ffffff;
+    border: 2.5px solid #fef08a;
+    border-radius: 24px;
+    padding: 6px 20px;
+    font-size: 0.88rem;
+    font-weight: 900;
+    letter-spacing: 0.8px;
+    box-shadow: 0 6px 20px rgba(154, 52, 18, 0.5), 0 0 16px rgba(250, 204, 21, 0.6);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    z-index: 4;
+}
+
+/* Shake animation for locked level click */
+.candy-road-node.shake-locked {
+    animation: nodeShake 0.4s ease-in-out;
+}
+
+@keyframes nodeShake {
+    0%, 100% { transform: translate(-50%, -50%); }
+    20%, 60% { transform: translate(-55%, -50%); }
+    40%, 80% { transform: translate(-45%, -50%); }
+}
+
+/* Lock Toast Alert */
+.road-lock-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(30, 10, 5, 0.95);
+    border: 2px solid #ea580c;
+    color: #ffedd5;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    z-index: 9999;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(234, 88, 12, 0.5);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+}
+
+.road-lock-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.gmc-btn-pair {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-open-map {
+    padding: 10px 14px;
+    font-size: 0.88rem;
+}
+
+.level-selector-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 12px;
+    max-height: 50vh;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.level-grid-card {
+    background: #ffffff;
+    border: 1.5px solid rgba(226, 149, 120, 0.25);
+    border-radius: var(--radius-sm);
+    padding: 8px 6px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(197, 125, 86, 0.08);
+}
+
+.level-grid-card:hover {
+    border-color: var(--color-terracotta);
+    background: #fff8f4;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 6px 16px rgba(197, 125, 86, 0.25);
+}
+
+.level-grid-card.completed {
+    border-color: var(--color-sage);
+    background: rgba(136, 168, 146, 0.15);
+}
+
+.lg-thumb {
+    width: 68px;
+    height: 68px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid rgba(226, 149, 120, 0.35);
+    margin-bottom: 6px;
+    background: #fff5f0;
+}
+
+.lg-thumb.coloring-thumb {
+    background: #ffffff;
+    object-fit: contain;
+    padding: 3px;
+    border: 1.5px solid rgba(197, 125, 86, 0.3);
+}
+
+.lg-level-num {
+    font-weight: 700;
+    color: var(--color-terracotta-dark);
+    font-size: 0.85rem;
+}
+
+.lg-title {
+    font-size: 0.72rem;
+    color: var(--color-cocoa-light);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    margin: 2px 0;
+    font-weight: 600;
+}
+
+.lg-material {
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+}
+
+.lg-badge {
+    font-size: 0.65rem;
+    color: var(--color-sage);
+    margin-top: 2px;
+    font-weight: 700;
+}
+
+/* Celebration Flower Petals Overlay */
+#festival-effects-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2000;
+}
+
+.celebration-petal {
+    position: absolute;
+    top: -20px;
+    width: 14px;
+    height: 18px;
+    border-radius: 50% 50% 50% 0;
+    animation: rainFlowerPetal ease-in forwards;
+}
+
+@keyframes rainFlowerPetal {
+    0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+    100% { transform: translateY(105vh) rotate(720deg) scale(0.6); opacity: 0; }
+}
+
+/* ==========================================================================
+   Micro-Interactions & Cursor Effects
+   ========================================================================== */
+
+/* Golden Sparkle Cursor Trail */
+.cursor-sparkle {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    box-shadow: 0 0 10px #e29578, 0 0 18px #fcd5c0;
+    transform: translate(-50%, -50%);
+    animation: sparkleFade 0.75s ease-out forwards;
+}
+
+@keyframes sparkleFade {
+    0% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) translateY(18px) scale(0.2) rotate(180deg);
+        opacity: 0;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .global-header {
+        padding: 10px 16px;
+    }
+    .header-title-group h1 {
+        font-size: 1rem;
+    }
+    .header-title-group p {
+        display: none;
+    }
+    .menu-hero-title {
+        font-size: 1.9rem;
+    }
+    .modal-decision-actions {
+        grid-template-columns: 1fr;
+    }
+    .game-screen {
+        padding: 14px 10px;
+    }
+}

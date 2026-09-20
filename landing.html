@@ -1,0 +1,2547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Shree Vinayaka Chavithi Divine Mahotsav — Ganesh Chaturthi Web Game</title>
+<meta name="description" content="500 Ganesha Puzzle Levels, 500 Murti Coloring Studio, Sacred River Nimarjanam Immersion. Experience the ultimate festival web game.">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Cinzel+Decorative:wght@700;900&family=Rozha+One&display=swap" rel="stylesheet">
+
+<!-- GSAP for Cinematic Animation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<style>
+/* ==========================================================================
+   1. AESTHETIC PEACH & TEMPLE ARCHITECTURE DESIGN SYSTEM
+   ========================================================================== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Warm Peach & Sandalwood Temple Palette */
+  --bg-peach-light: #fff5f0;
+  --bg-peach-soft: #ffe8dc;
+  --bg-peach-base: #fdf7ed;
+  --bg-peach-blush: #f8c2a8;
+  --color-sand: #fefae0;
+  
+  /* Rich Terracotta, Gold & Cocoa Accents */
+  --color-terracotta: #e29578;
+  --color-terracotta-dark: #c57d56;
+  --color-rose-gold: #b06d48;
+  --color-gold-warm: #d4a373;
+  --color-gold-soft: #faedcd;
+  --color-saffron-bright: #ff7f00;
+  --color-saffron-deep: #e65100;
+  
+  /* High-Contrast Typography */
+  --color-cocoa: #341e15;
+  --color-cocoa-light: #5c3a2b;
+  --color-text-muted: #7d5a4a;
+  
+  /* Glass Cards */
+  --color-card-bg: rgba(255, 252, 249, 0.88);
+  --color-card-glass: rgba(255, 248, 243, 0.94);
+  --border-peach: 1.5px solid rgba(226, 149, 120, 0.45);
+  --border-peach-hover: 2px solid rgba(197, 125, 86, 0.85);
+  
+  /* Soft Festive Shadows */
+  --shadow-soft: 0 10px 30px rgba(226, 149, 120, 0.18), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 14px 38px rgba(197, 125, 86, 0.16), 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-card-hover: 0 22px 50px rgba(197, 125, 86, 0.28), 0 0 25px rgba(252, 213, 192, 0.7);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-peach-base);
+  color: var(--color-cocoa);
+  font-family: 'Outfit', -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--bg-peach-base);
+  background-image: 
+    url('assets/images/temple_bg_texture.png'),
+    radial-gradient(circle at 50% 0%, rgba(255, 248, 238, 0.85) 0%, transparent 60%),
+    radial-gradient(circle at 10% 20%, rgba(254, 237, 218, 0.75) 0%, transparent 50%),
+    radial-gradient(circle at 90% 20%, rgba(254, 237, 218, 0.75) 0%, transparent 50%),
+    radial-gradient(circle at 50% 90%, rgba(248, 222, 196, 0.5) 0%, transparent 60%),
+    linear-gradient(180deg, #fffdf8 0%, #fdf6ec 40%, #faecd8 100%);
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-size: 550px auto, cover, cover, cover, cover, cover;
+  color: var(--color-cocoa);
+  overflow-x: hidden;
+  position: relative;
+  line-height: 1.65;
+}
+
+/* Subtle Golden Header Baseline */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #c57d56 0%, #d4a373 25%, #fcd5c0 50%, #d4a373 75%, #c57d56 100%);
+  box-shadow: 0 0 10px rgba(212, 163, 115, 0.6);
+  z-index: 1001;
+}
+
+/* Custom Cursor (Desktop Only) */
+@media (hover: hover) and (pointer: fine) {
+  #cursor-dot, #cursor-aura {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    transition: opacity 0.3s ease;
+  }
+  #cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: #c57d56;
+    box-shadow: 0 0 8px #e29578;
+  }
+  #cursor-aura {
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid rgba(197, 125, 86, 0.55);
+    background: radial-gradient(circle, rgba(226, 149, 120, 0.18) 0%, transparent 70%);
+    transition: width 0.25s ease-out, height 0.25s ease-out, background 0.25s ease-out, border-color 0.25s ease-out;
+  }
+  body.cursor-hover #cursor-aura {
+    width: 62px;
+    height: 62px;
+    background: radial-gradient(circle, rgba(197, 125, 86, 0.25) 0%, transparent 70%);
+    border-color: rgba(176, 109, 72, 0.85);
+  }
+}
+
+/* Global Canvas for Ambient Particles */
+#particles-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   2. TOP NAVIGATION / FLOATING TEMPLE HEADER
+   ========================================================================== */
+.site-nav {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  max-width: 1240px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 28px;
+  background: rgba(255, 252, 248, 0.85);
+  border: 1.5px solid rgba(226, 149, 120, 0.4);
+  border-radius: 60px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: var(--shadow-card);
+  transition: all 0.4s ease;
+}
+
+.site-nav.scrolled {
+  top: 10px;
+  padding: 10px 22px;
+  background: rgba(255, 250, 245, 0.95);
+  border-color: rgba(197, 125, 86, 0.7);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--color-cocoa);
+}
+
+.nav-om {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 26px;
+  color: var(--color-terracotta-dark);
+  filter: drop-shadow(0 0 8px rgba(197, 125, 86, 0.5));
+  animation: omPulse 4s ease-in-out infinite;
+}
+
+@keyframes omPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px rgba(197, 125, 86, 0.4)); }
+  50% { transform: scale(1.1); filter: drop-shadow(0 0 14px rgba(226, 149, 120, 0.8)); }
+}
+
+.nav-title-group h1 {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: var(--color-cocoa);
+}
+
+.nav-title-group span {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  letter-spacing: 1px;
+  display: block;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  list-style: none;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--color-cocoa-light);
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s;
+  position: relative;
+  padding: 4px 0;
+}
+
+.nav-link:hover {
+  color: var(--color-terracotta-dark);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-terracotta-dark);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-audio-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(254, 237, 218, 0.8);
+  border: 1px solid rgba(197, 125, 86, 0.4);
+  border-radius: 30px;
+  color: var(--color-cocoa);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-audio-pill:hover {
+  background: rgba(252, 213, 192, 0.95);
+  border-color: var(--color-terracotta-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(197, 125, 86, 0.25);
+}
+
+.btn-nav-play {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 22px;
+  background: linear-gradient(135deg, #e65100 0%, #c57d56 100%);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 30px;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(197, 125, 86, 0.4);
+  transition: all 0.3s;
+}
+
+.btn-nav-play:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 25px rgba(197, 125, 86, 0.65);
+}
+
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .nav-title-group span { display: none; }
+}
+
+/* ==========================================================================
+   3. HERO SECTION — CINEMATIC TEMPLE OPENING
+   ========================================================================== */
+.hero-section {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 130px 24px 80px;
+  overflow: hidden;
+  z-index: 5;
+}
+
+/* Hero Ambient Layers */
+.hero-mandala-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(450px, 60vw, 850px);
+  height: clamp(450px, 60vw, 850px);
+  background-image: url('assets/images/decor_mandala_watermark.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.08;
+  pointer-events: none;
+  animation: rotateMandala 120s linear infinite;
+}
+
+@keyframes rotateMandala {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.hero-temple-silhouette {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 280px;
+  background-image: url('assets/images/decor_temple_gopuram_watermark.png');
+  background-repeat: repeat-x;
+  background-position: bottom center;
+  background-size: 320px auto;
+  opacity: 0.12;
+  pointer-events: none;
+  mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, transparent 100%);
+}
+
+.hero-light-cone {
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 1000px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(254, 237, 218, 0.7) 0%, rgba(248, 194, 168, 0.25) 40%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Hero Grid Layout */
+.hero-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 50px;
+  position: relative;
+  z-index: 10;
+}
+
+@media (max-width: 1024px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+  }
+}
+
+/* Left Hero Content */
+.hero-content {
+  position: relative;
+}
+
+.hero-badge-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 22px;
+  background: rgba(255, 245, 240, 0.9);
+  border: 1.5px solid rgba(226, 149, 120, 0.5);
+  border-radius: 40px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 18px rgba(197, 125, 86, 0.12);
+}
+
+.hero-badge-text {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-terracotta-dark);
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(40px, 5.8vw, 76px);
+  font-weight: 900;
+  line-height: 1.14;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #4a150e 0%, #8a2510 35%, #c57d56 70%, #6e1c0c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  display: inline-block;
+  filter: drop-shadow(0 2px 10px rgba(197, 125, 86, 0.2));
+}
+
+.hero-title::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  transform: skewX(-25deg);
+  animation: lightSweep 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes lightSweep {
+  0%, 70% { left: -100%; }
+  100% { left: 200%; }
+}
+
+.hero-mantra {
+  font-size: clamp(18px, 2.2vw, 25px);
+  font-weight: 700;
+  color: var(--color-terracotta-dark);
+  margin-bottom: 20px;
+  letter-spacing: 1.5px;
+}
+
+.hero-description {
+  font-size: clamp(15px, 1.4vw, 18px);
+  color: var(--color-cocoa-light);
+  line-height: 1.8;
+  max-width: 620px;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 1024px) {
+  .hero-description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* CTA Group */
+.hero-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+@media (max-width: 1024px) {
+  .hero-cta-group {
+    justify-content: center;
+  }
+}
+
+.btn-primary-magnetic {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px 44px;
+  background: linear-gradient(135deg, #ff7f00 0%, #e65100 50%, #b71c1c 100%);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: 60px;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(230, 81, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  z-index: 2;
+  overflow: hidden;
+}
+
+.btn-primary-magnetic::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.75s ease;
+}
+
+.btn-primary-magnetic:hover::before {
+  left: 200%;
+}
+
+.btn-primary-magnetic:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 16px 45px rgba(230, 81, 0, 0.6), 0 0 25px rgba(252, 213, 192, 0.8);
+}
+
+.btn-primary-magnetic .btn-aura {
+  position: absolute;
+  inset: -6px;
+  border-radius: 70px;
+  background: radial-gradient(circle, rgba(248, 194, 168, 0.6) 0%, transparent 70%);
+  z-index: -1;
+  animation: auraPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes auraPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+
+.btn-secondary-outlined {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 17px 34px;
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--color-cocoa);
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1.5px solid rgba(197, 125, 86, 0.5);
+  border-radius: 60px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-secondary-outlined:hover {
+  background: rgba(254, 237, 218, 0.9);
+  border-color: var(--color-terracotta-dark);
+  color: var(--color-terracotta-dark);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-secondary-outlined .arrow {
+  transition: transform 0.3s ease;
+}
+
+.btn-secondary-outlined:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Right Hero Visual */
+.hero-visual-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-divine-aura {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(340px, 42vw, 550px);
+  height: clamp(340px, 42vw, 550px);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(252, 213, 192, 0.65) 0%, rgba(226, 149, 120, 0.3) 45%, transparent 70%);
+  pointer-events: none;
+  animation: divineAuraBreath 5s ease-in-out infinite;
+}
+
+@keyframes divineAuraBreath {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+}
+
+.hero-ganesh-img {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+  display: block;
+  z-index: 5;
+  filter: drop-shadow(0 20px 40px rgba(197, 125, 86, 0.35)) drop-shadow(0 0 35px rgba(252, 213, 192, 0.6));
+  animation: gentleFloat 6s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+.hero-diya-left, .hero-diya-right {
+  position: absolute;
+  bottom: 0;
+  width: 90px;
+  height: auto;
+  pointer-events: none;
+  z-index: 6;
+  filter: drop-shadow(0 0 15px rgba(230, 81, 0, 0.4));
+}
+.hero-diya-left { left: 5%; }
+.hero-diya-right { right: 5%; transform: scaleX(-1); }
+
+/* ==========================================================================
+   4. STATS STRIP — INTERACTIVE COUNT-UP
+   ========================================================================== */
+.stats-strip-section {
+  position: relative;
+  z-index: 10;
+  padding: 0 20px 80px;
+  margin-top: -20px;
+}
+
+.stats-grid {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  padding: 30px;
+  background: var(--color-card-glass);
+  border: 1.5px solid rgba(226, 149, 120, 0.45);
+  border-radius: 28px;
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-card);
+}
+
+@media (max-width: 960px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stats-grid > div:last-child {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 540px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .stats-grid > div:last-child {
+    grid-column: span 1;
+  }
+}
+
+.stat-item {
+  text-align: center;
+  padding: 16px 12px;
+  border-radius: 18px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.stat-item:hover {
+  background: rgba(254, 237, 218, 0.6);
+  transform: translateY(-4px);
+}
+
+.stat-number {
+  font-size: clamp(34px, 4vw, 52px);
+  font-weight: 900;
+  background: linear-gradient(135deg, #b71c1c 0%, #e65100 40%, #c57d56 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.stat-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--color-cocoa);
+  margin-bottom: 2px;
+}
+
+.stat-desc {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   5. "WHAT'S INSIDE" SECTION — 3 CINEMATIC GAME CARDS
+   ========================================================================== */
+.section-wrapper {
+  padding: 100px 24px;
+  position: relative;
+  z-index: 10;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 60px;
+}
+
+.eyebrow-badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-terracotta-dark);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 4.5vw, 54px);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--color-cocoa);
+  margin-bottom: 16px;
+}
+
+.section-subtitle {
+  font-size: clamp(15px, 1.4vw, 18px);
+  color: var(--color-cocoa-light);
+  line-height: 1.7;
+}
+
+/* 3 Cards Grid */
+.games-cards-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+@media (max-width: 992px) {
+  .games-cards-grid {
+    grid-template-columns: 1fr;
+    max-width: 580px;
+  }
+}
+
+.cinematic-game-card {
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--color-card-bg);
+  border: 1.5px solid rgba(226, 149, 120, 0.4);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease, border-color 0.4s ease;
+  text-decoration: none;
+  color: var(--color-cocoa);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-card);
+}
+
+.cinematic-game-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: var(--color-terracotta-dark);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.card-spotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(252, 213, 192, 0.45), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.cinematic-game-card:hover .card-spotlight {
+  opacity: 1;
+}
+
+.card-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cinematic-game-card:hover .card-img-wrap img {
+  transform: scale(1.08);
+}
+
+.card-badge {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  padding: 6px 16px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(197, 125, 86, 0.5);
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--color-terracotta-dark);
+  backdrop-filter: blur(8px);
+  z-index: 5;
+  box-shadow: 0 4px 12px rgba(197, 125, 86, 0.15);
+}
+
+.card-body {
+  padding: 32px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background: linear-gradient(180deg, rgba(255, 252, 249, 0.95) 0%, rgba(254, 244, 237, 0.98) 100%);
+}
+
+.card-icon {
+  font-size: 38px;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-cocoa);
+  margin-bottom: 6px;
+}
+
+.card-telugu {
+  font-size: 15px;
+  color: var(--color-terracotta-dark);
+  margin-bottom: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.card-desc {
+  font-size: 14px;
+  color: var(--color-cocoa-light);
+  line-height: 1.7;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.card-features-list {
+  list-style: none;
+  margin-bottom: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-features-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--color-cocoa-light);
+}
+
+.card-features-list .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-terracotta-dark);
+  box-shadow: 0 0 6px rgba(197, 125, 86, 0.5);
+}
+
+.btn-card-launch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-launch-puzzle {
+  background: linear-gradient(135deg, #6a1b9a, #8e24aa);
+  color: #fff;
+}
+.btn-launch-dressup {
+  background: linear-gradient(135deg, #c62828, #e53935);
+  color: #fff;
+}
+.btn-launch-nimarjanam {
+  background: linear-gradient(135deg, #0277bd, #0288d1);
+  color: #fff;
+}
+
+.cinematic-game-card:hover .btn-card-launch {
+  filter: brightness(1.15);
+  transform: scale(1.02);
+}
+
+.btn-card-btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.btn-card-roadmap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 11px 16px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 800;
+  border: 1.5px solid var(--color-terracotta-dark);
+  background: rgba(254, 237, 218, 0.85);
+  color: var(--color-cocoa);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.btn-card-roadmap:hover {
+  background: var(--color-terracotta-dark);
+  color: #ffffff;
+  transform: scale(1.02);
+  box-shadow: 0 4px 14px rgba(197, 125, 86, 0.35);
+}
+
+/* ==========================================================================
+   6. 500 MURTI CAROUSEL
+   ========================================================================== */
+.carousel-section {
+  background: rgba(254, 237, 218, 0.4);
+  border-top: 1px solid rgba(226, 149, 120, 0.3);
+  border-bottom: 1px solid rgba(226, 149, 120, 0.3);
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-stage-wrap {
+  max-width: 1300px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.carousel-track-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  padding: 40px 0;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  user-select: none;
+}
+
+.carousel-track-container::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-track-container:active {
+  cursor: grabbing;
+}
+
+.carousel-card {
+  flex: 0 0 240px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1.5px solid rgba(226, 149, 120, 0.4);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  color: var(--color-cocoa);
+  position: relative;
+  transform: scale(0.92);
+  opacity: 0.85;
+  box-shadow: var(--shadow-soft);
+}
+
+.carousel-card.active, .carousel-card:hover {
+  transform: scale(1.05) translateY(-6px);
+  opacity: 1;
+  border-color: var(--color-terracotta-dark);
+  box-shadow: var(--shadow-card-hover);
+  z-index: 10;
+}
+
+.carousel-card img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.carousel-card:hover img {
+  transform: scale(1.08);
+}
+
+.carousel-card-info {
+  padding: 14px 12px;
+  background: #ffffff;
+  text-align: center;
+}
+
+.carousel-card-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--color-cocoa);
+  margin-bottom: 2px;
+}
+
+.carousel-card-sub {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+/* Carousel Nav Controls */
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.carousel-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1.5px solid rgba(197, 125, 86, 0.4);
+  color: var(--color-cocoa);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.3s;
+}
+
+.carousel-btn:hover {
+  background: var(--color-terracotta-dark);
+  color: #fff;
+  border-color: var(--color-terracotta-dark);
+  transform: scale(1.1);
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(197, 125, 86, 0.3);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.carousel-dot.active {
+  width: 28px;
+  border-radius: 12px;
+  background: var(--color-terracotta-dark);
+}
+
+/* ==========================================================================
+   7. HOW IT WORKS — TIMELINE
+   ========================================================================== */
+.timeline-section {
+  position: relative;
+}
+
+.timeline-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  padding: 40px 0;
+}
+
+.timeline-track-line {
+  position: absolute;
+  top: 72px;
+  left: 10%;
+  right: 10%;
+  height: 4px;
+  background: rgba(226, 149, 120, 0.3);
+  z-index: 1;
+}
+
+.timeline-progress-fill {
+  width: 66%;
+  height: 100%;
+  background: linear-gradient(90deg, #e65100, #c57d56);
+  box-shadow: 0 0 10px rgba(197, 125, 86, 0.5);
+  transition: width 0.6s ease;
+}
+
+.timeline-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .timeline-track-line { display: none; }
+  .timeline-steps-grid { grid-template-columns: 1fr; }
+}
+
+.timeline-step-card {
+  background: var(--color-card-glass);
+  border: 1.5px solid rgba(226, 149, 120, 0.45);
+  border-radius: 24px;
+  padding: 36px 26px;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-card);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.timeline-step-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--color-terracotta-dark);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.step-number-badge {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e65100, #c57d56);
+  color: #fff;
+  font-size: 24px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 6px 20px rgba(197, 125, 86, 0.4);
+  border: 2px solid #fff;
+}
+
+.step-icon {
+  font-size: 34px;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.step-title {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--color-cocoa);
+  margin-bottom: 10px;
+}
+
+.step-desc {
+  font-size: 14px;
+  color: var(--color-cocoa-light);
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   8. 5 FESTIVAL ENVIRONMENTS SHOWCASE
+   ========================================================================== */
+.env-section {
+  position: relative;
+  transition: background 0.8s ease;
+}
+
+.env-interactive-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.env-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.env-tab-btn {
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1.5px solid rgba(226, 149, 120, 0.4);
+  border-radius: 40px;
+  color: var(--color-cocoa);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.3s;
+}
+
+.env-tab-btn:hover {
+  background: rgba(254, 237, 218, 0.95);
+  border-color: var(--color-terracotta-dark);
+  color: var(--color-terracotta-dark);
+}
+
+.env-tab-btn.active {
+  background: linear-gradient(135deg, #e65100, #c57d56);
+  color: #fff;
+  border-color: transparent;
+  font-weight: 900;
+  box-shadow: 0 4px 18px rgba(197, 125, 86, 0.45);
+}
+
+.env-display-stage {
+  position: relative;
+  border-radius: 32px;
+  overflow: hidden;
+  border: 2px solid rgba(226, 149, 120, 0.5);
+  box-shadow: var(--shadow-card-hover);
+  aspect-ratio: 16 / 9;
+  max-height: 580px;
+}
+
+.env-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: filter 0.6s ease, transform 0.6s ease;
+}
+
+.env-overlay-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px 36px;
+  background: linear-gradient(0deg, rgba(30, 10, 5, 0.9) 0%, rgba(30, 10, 5, 0.4) 65%, transparent 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.env-info-left h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(24px, 3.5vw, 42px);
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.env-info-left p {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 600px;
+}
+
+/* ==========================================================================
+   9. FEATURES GRID — CAPABILITIES
+   ========================================================================== */
+.features-section {
+  position: relative;
+}
+
+.features-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 580px) {
+  .features-grid { grid-template-columns: 1fr; }
+}
+
+.feature-box {
+  background: var(--color-card-glass);
+  border: 1.5px solid rgba(226, 149, 120, 0.45);
+  border-radius: 20px;
+  padding: 32px 24px;
+  box-shadow: var(--shadow-card);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.feature-box:hover {
+  background: rgba(255, 245, 240, 0.95);
+  border-color: var(--color-terracotta-dark);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.feature-icon-wrap {
+  font-size: 40px;
+  margin-bottom: 16px;
+  display: inline-block;
+  transition: transform 0.4s ease;
+}
+
+.feature-box:hover .feature-icon-wrap {
+  transform: translateY(-4px) rotate(8deg);
+}
+
+.feature-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-cocoa);
+  margin-bottom: 8px;
+}
+
+.feature-desc {
+  font-size: 13px;
+  color: var(--color-cocoa-light);
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   10. FINAL EMOTIONAL CTA SECTION
+   ========================================================================== */
+.final-cta-section {
+  position: relative;
+  padding: 140px 24px 120px;
+  text-align: center;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, rgba(254, 237, 218, 0.85) 0%, rgba(253, 247, 237, 0.95) 70%);
+  border-top: 1.5px solid rgba(226, 149, 120, 0.35);
+}
+
+.final-mandala-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 750px;
+  height: 750px;
+  background-image: url('assets/images/decor_mandala_watermark.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.1;
+  pointer-events: none;
+  animation: rotateMandala 90s linear infinite reverse;
+}
+
+.cta-glow-disc {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(252, 213, 192, 0.5) 0%, transparent 70%);
+  pointer-events: none;
+  animation: divineAuraBreath 4s ease-in-out infinite;
+}
+
+.final-cta-content {
+  position: relative;
+  z-index: 5;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.final-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(38px, 6vw, 72px);
+  font-weight: 900;
+  background: linear-gradient(135deg, #4a150e 0%, #8a2510 35%, #c57d56 70%, #6e1c0c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 2px 10px rgba(197, 125, 86, 0.25));
+}
+
+.final-subtext {
+  font-size: clamp(16px, 2vw, 22px);
+  color: var(--color-cocoa-light);
+  margin-bottom: 44px;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   11. MINIMAL LUXURY FOOTER
+   ========================================================================== */
+footer {
+  background: #f7ecdd;
+  border-top: 1.5px solid rgba(197, 125, 86, 0.35);
+  padding: 48px 24px;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+.footer-om {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 38px;
+  color: var(--color-terracotta-dark);
+  margin-bottom: 12px;
+}
+
+.footer-text {
+  font-size: 14px;
+  color: var(--color-cocoa-light);
+  line-height: 1.8;
+}
+
+.footer-text strong {
+  color: var(--color-cocoa);
+}
+
+/* ==========================================================================
+   12. PLAYER PROFILE MODAL (MOOSHIKA'S MODAK DASH / FESTIVAL LOGIN)
+   ========================================================================== */
+.player-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 14, 8, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 100000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.player-modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.player-modal-card {
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  border: 3.5px solid #f28014;
+  border-radius: 32px;
+  padding: 40px 32px 36px;
+  position: relative;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35), 0 0 45px rgba(242, 128, 20, 0.25);
+  transform: scale(0.92) translateY(24px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.player-modal-backdrop.active .player-modal-card {
+  transform: scale(1) translateY(0);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: #f5ede6;
+  color: #7d5a4a;
+  font-size: 24px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.modal-close-btn:hover {
+  background: #ecdacb;
+  color: #341e15;
+  transform: scale(1.1);
+}
+
+.modal-header-block {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.modal-main-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 36px;
+  font-weight: 900;
+  color: #f28014;
+  line-height: 1.15;
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+
+.modal-subtitle {
+  font-size: 15px;
+  color: #63537a;
+  font-weight: 500;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 800;
+  color: #2b2244;
+  margin-bottom: 8px;
+  letter-spacing: 0.2px;
+}
+
+.form-group label .req-star {
+  color: #e53935;
+}
+
+.form-input, .form-select {
+  width: 100%;
+  background: #f1ebd9;
+  border: 1.5px solid transparent;
+  border-radius: 16px;
+  padding: 14px 18px;
+  font-size: 16px;
+  color: #341e15;
+  font-family: 'Outfit', sans-serif;
+  transition: all 0.25s ease;
+}
+
+.form-input::placeholder {
+  color: #a1978d;
+}
+
+.form-input:focus, .form-select:focus {
+  outline: none;
+  border-color: #f28014;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(242, 128, 20, 0.18);
+}
+
+.form-select {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23341e15" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 20px;
+  padding-right: 42px;
+}
+
+.error-text-hint {
+  font-size: 12px;
+  color: #d32f2f;
+  margin-top: 5px;
+  font-weight: 600;
+  display: none;
+}
+
+.btn-modal-save {
+  width: 100%;
+  background: linear-gradient(135deg, #f78b1f 0%, #f2720c 100%);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 800;
+  border: none;
+  border-radius: 18px;
+  padding: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(242, 114, 12, 0.4);
+  transition: all 0.25s ease;
+  font-family: 'Outfit', sans-serif;
+}
+
+.btn-modal-save:hover {
+  filter: brightness(1.06);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(242, 114, 12, 0.55);
+}
+
+.btn-modal-save:active {
+  transform: scale(0.98);
+}
+
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor Aura -->
+<div id="cursor-dot"></div>
+<div id="cursor-aura"></div>
+
+<!-- Ambient Particles Canvas -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- ==========================================================================
+     TOP NAVIGATION BAR
+     ========================================================================== -->
+<nav class="site-nav" id="siteNav">
+  <a href="#" class="nav-brand">
+    <span class="nav-om">ॐ</span>
+    <div class="nav-title-group">
+      <h1>SHREE VINAYAKA CHAVITHI</h1>
+      <span>DIVINE FESTIVAL WEB GAME</span>
+    </div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#games" class="nav-link">Games</a></li>
+    <li><a href="#gallery" class="nav-link">500 Murtis</a></li>
+    <li><a href="#how" class="nav-link">How It Works</a></li>
+    <li><a href="#environments" class="nav-link">Sacred Ghats</a></li>
+    <li><a href="#features" class="nav-link">Features</a></li>
+  </ul>
+
+  <div class="nav-actions">
+    <button class="btn-audio-pill" id="navBellBtn" title="Ring Sacred Temple Bell">
+      <span>🔔</span> <span id="bellTxt">Temple Bell</span>
+    </button>
+    <a href="index.html" class="btn-nav-play">
+      <span>🎮</span> Play Now
+    </a>
+  </div>
+</nav>
+
+<!-- ==========================================================================
+     HERO SECTION
+     ========================================================================== -->
+<section class="hero-section" id="hero">
+  <div class="hero-mandala-bg"></div>
+  <div class="hero-temple-silhouette"></div>
+  <div class="hero-light-cone"></div>
+
+  <div class="hero-container">
+    <!-- Left Hero Typography -->
+    <div class="hero-content">
+      <div class="hero-badge-wrap">
+        <span>🪔</span>
+        <span class="hero-badge-text">Anant Chaturdashi Divine Mahotsav</span>
+        <span>🪔</span>
+      </div>
+
+      <h1 class="hero-title" id="heroTitle">Shree Vinayaka Chavithi<br>Divine Mahotsav</h1>
+      
+      <p class="hero-mantra">॥ Om Gam Ganapataye Namaha ॥</p>
+
+      <p class="hero-description">
+        500 Sacred Ganesha Jigsaw Puzzles &bull; 24K Gold &amp; Natural Pigment Murti Painting Studio &bull; Sacred Ganga-Godavari River Visarjan Immersion.<br>
+        The most authentic Ganesh Chaturthi digital experience &mdash; all directly in your browser, no download required.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="index.html" class="btn-primary-magnetic" id="heroPrimaryCta">
+          <span class="btn-aura"></span>
+          <span>🎮</span> Play Now &mdash; Start Festival!
+        </a>
+        <a href="#games" class="btn-secondary-outlined">
+          <span>See Inside</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right Hero Visual -->
+    <div class="hero-visual-wrap" id="heroVisual">
+      <div class="hero-divine-aura"></div>
+      <img src="assets/images/sprites/lalbaug_3d.png" alt="Lalbaugcha Raja 3D Statue" class="hero-ganesh-img" id="heroGaneshImg">
+      <img src="assets/images/decor_diya_lotus_left.png" alt="Diya" class="hero-diya-left">
+      <img src="assets/images/decor_diya_lotus_right.png" alt="Diya" class="hero-diya-right">
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     STATS STRIP
+     ========================================================================== -->
+<section class="stats-strip-section">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-number" data-target="500">0</div>
+      <div class="stat-title">Puzzle Levels</div>
+      <div class="stat-desc">Unique Challenges</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="500">0</div>
+      <div class="stat-title">Divine Murtis</div>
+      <div class="stat-desc">Sacred Idols</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="8">0</div>
+      <div class="stat-title">Sculptural Styles</div>
+      <div class="stat-desc">Bronze to Marble</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="5">0</div>
+      <div class="stat-title">Sacred Ghats</div>
+      <div class="stat-desc">Immersion Places</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="3">0</div>
+      <div class="stat-title">Game Modes</div>
+      <div class="stat-desc">Full Experiences</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     WHAT'S INSIDE — 3 CINEMATIC CARDS
+     ========================================================================== -->
+<section class="section-wrapper" id="games">
+  <div class="section-header">
+    <span class="eyebrow-badge">🎮 THREE DIVINE EXPERIENCES</span>
+    <h2 class="section-title">What's Inside the Festival?</h2>
+    <p class="section-subtitle">Three complete games &mdash; each offering an authentic, interactive Ganesh Chaturthi celebration in a unique way.</p>
+  </div>
+
+  <div class="games-cards-grid">
+    <!-- Game 1: Puzzle -->
+    <a href="index.html?mode=puzzle" class="cinematic-game-card">
+      <div class="card-spotlight"></div>
+      <div class="card-img-wrap">
+        <img src="assets/images/lalbaug.jpg" alt="Puzzle Assembly">
+        <span class="card-badge">🧩 GAME 1</span>
+      </div>
+      <div class="card-body">
+        <span class="card-icon">🧩</span>
+        <h3 class="card-title">Puzzle Assembly</h3>
+        <div class="card-telugu">500 Puzzle Levels</div>
+        <p class="card-desc">Assemble 500 divine Ganesha puzzles piece-by-piece while using the reference photo darshan guide. Earn ⭐⭐⭐ stars and timer high scores on every level!</p>
+        <ul class="card-features-list">
+          <li><span class="dot"></span> 500 unique puzzle levels (1–500)</li>
+          <li><span class="dot"></span> Star rating + precision timer scoring system</li>
+          <li><span class="dot"></span> Full reference photo darshan guide side panel</li>
+          <li><span class="dot"></span> Authentic temple bhajan &amp; bell audio</li>
+        </ul>
+        <div class="btn-card-btn-group">
+          <button class="btn-card-launch btn-launch-puzzle" data-target="index.html?mode=puzzle">Play Puzzle &rarr;</button>
+          <button class="btn-card-roadmap" data-target="index.html?view=roadmap&mode=puzzle">🗺️ 500 Level Road Map</button>
+        </div>
+      </div>
+    </a>
+
+    <!-- Game 2: Coloring -->
+    <a href="index.html?mode=dressup" class="cinematic-game-card">
+      <div class="card-spotlight"></div>
+      <div class="card-img-wrap">
+        <img src="assets/images/coloring_dagdusheth.jpg" alt="Murti Coloring Studio">
+        <span class="card-badge">🎨 GAME 2</span>
+      </div>
+      <div class="card-body">
+        <span class="card-icon">🎨</span>
+        <h3 class="card-title">Murti Coloring Studio</h3>
+        <div class="card-telugu">500 Murti Paintings</div>
+        <p class="card-desc">Adorn 500 unpainted sacred idols with Sindoor vermillion, Turmeric yellow, 24K Gold leaf, and Navagraha shades using fine brushes and fill tools.</p>
+        <ul class="card-features-list">
+          <li><span class="dot"></span> Brush, bucket fill, eraser &amp; gradient tools</li>
+          <li><span class="dot"></span> 24K Gold, Sindoor, Turmeric sacred palettes</li>
+          <li><span class="dot"></span> Save &amp; export your sacred artwork</li>
+          <li><span class="dot"></span> Navagraha cosmic color themes</li>
+        </ul>
+        <div class="btn-card-btn-group">
+          <button class="btn-card-launch btn-launch-dressup" data-target="index.html?mode=dressup">Color Murtis &rarr;</button>
+          <button class="btn-card-roadmap" data-target="index.html?view=roadmap&mode=dressup">🗺️ 500 Level Road Map</button>
+        </div>
+      </div>
+    </a>
+
+    <!-- Game 3: Nimarjanam -->
+    <a href="index.html?mode=nimarjanam" class="cinematic-game-card">
+      <div class="card-spotlight"></div>
+      <div class="card-img-wrap">
+        <img src="assets/images/nimarjanam_bg.jpg" alt="Nimarjanam Visarjan">
+        <span class="card-badge">🌊 GAME 3</span>
+      </div>
+      <div class="card-body">
+        <span class="card-icon">🌊</span>
+        <h3 class="card-title">Nimarjanam Visarjan</h3>
+        <div class="card-telugu">500 Holy Immersions</div>
+        <p class="card-desc">Lift massive 3D idols from the road using a heavy tower crane. Adjust the crane claw size (+/−) to grip the idol securely, then immerse it into holy waters!</p>
+        <ul class="card-features-list">
+          <li><span class="dot"></span> Tower crane with adjustable claw grip (+/−)</li>
+          <li><span class="dot"></span> Living animated river with flying birds &amp; diyas</li>
+          <li><span class="dot"></span> 5 scenic ghat environments to choose</li>
+          <li><span class="dot"></span> Authentic Dhol-Tasha grand visarjan ceremony</li>
+        </ul>
+        <div class="btn-card-btn-group">
+          <button class="btn-card-launch btn-launch-nimarjanam" data-target="index.html?mode=nimarjanam">Perform Visarjan &rarr;</button>
+          <button class="btn-card-roadmap" data-target="index.html?view=roadmap&mode=nimarjanam">🗺️ 500 Level Road Map</button>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     500 MURTI CAROUSEL
+     ========================================================================== -->
+<section class="section-wrapper carousel-section" id="gallery">
+  <div class="section-header">
+    <span class="eyebrow-badge">🖼️ 500 SACRED MURTIS</span>
+    <h2 class="section-title">Explore 500 Divine Idols</h2>
+    <p class="section-subtitle">From Mumbai's iconic Lalbaugcha Raja to Eco-friendly Terracotta &mdash; every murti is unique. Drag, swipe or scroll to browse!</p>
+  </div>
+
+  <div class="carousel-stage-wrap">
+    <div class="carousel-track-container" id="carouselTrack">
+      <!-- 10 Idol Cards -->
+      <a href="index.html?mode=puzzle" class="carousel-card">
+        <img src="assets/images/lalbaug.jpg" alt="Lalbaugcha Raja" loading="lazy">
+        <div class="carousel-card-info">
+          <div class="carousel-card-title">Lalbaugcha Raja</div>
+          <div class="carousel-card-sub">King of Parel, Mumbai</div>
+        </div>
+      </a>
+      <a href="index.html?mode=puzzle" class="carousel-card">
+        <img src="assets/images/dagdusheth.jpg" alt="Dagdusheth Halwai" loading="lazy">
+        <div class="carousel-card-info">
+          <div class="carousel-card-title">Dagdusheth Halwai</div>
+          <div class="carousel-card-sub">Pune Golden Ganpati</div>
+        </div>
+      </a>
+      <a href="index.html?mode=puzzle" class="carousel-card active">
+        <img src="assets/images/bal_ganesh.jpg" alt="Bal Ganesha" loading="lazy">
+        <div class="carousel-card-info">
+          <div class="carousel-card-title">Bal Ganesha</div>
+          <div class="carousel-card-sub">Divine Playful Form</div>
+        </div>
+      </a>
+      <a href="index.html?mode=puzzle" class="carousel-card">
+        <img src="assets/images/siddhivinayak.jpg" alt="Siddhivinayak" loading="lazy">
+        <div class="carousel-card-info">
+          <div class="carousel-card-title">Siddhivinayak</div>
+          <div class="carousel-card-sub">Prabhadevi Wish-Fulfiller</div>
+        </div>
+      </a>
+      <a href="index.html?mode=puzzle" class="carousel-card">
+        <img src="assets/images/panchamukhi.jpg" alt="Panchamukhi Ganesha" loading="lazy">
+        <div class="carousel-card-info">
+          <div class="carousel-card-title">Panchamukhi Ganesha</div>
+          <div class="carousel-card-sub">Five-Faced Cosmic Form</div>
+        </div>
+      </a>
+      <a href="index.html?mode=puzzle" class="carousel-card">
+        <img src="assets/images/nritya.jpg" alt="Nritya Ganesha" loading="lazy">
+        <div class="carousel-card-info">
+          <div class="carousel-card-title">Nritya Ganesha</div>
+          <div class="carousel-card-sub">Dancing Divine Master</div>
+        </div>
+      </a>
+      <a href="index.html?mode=puzzle" class="carousel-card">
+        <img src="assets/images/chola_bronze.jpg" alt="Chola Bronze" loading="lazy">
+        <div class="carousel-card-info">
+          <div class="carousel-card-title">Chola Bronze</div>
+          <div class="carousel-card-sub">Ancient Antique Heritage</div>
+        </div>
+      </a>
+      <a href="index.html?mode=puzzle" class="carousel-card">
+        <img src="assets/images/terracotta.jpg" alt="Eco Terracotta" loading="lazy">
+        <div class="carousel-card-info">
+          <div class="carousel-card-title">Eco Terracotta</div>
+          <div class="carousel-card-sub">Sacred Shadu Clay</div>
+        </div>
+      </a>
+      <a href="index.html?mode=puzzle" class="carousel-card">
+        <img src="assets/images/mayureshwar.jpg" alt="Mayureshwar" loading="lazy">
+        <div class="carousel-card-info">
+          <div class="carousel-card-title">Mayureshwar</div>
+          <div class="carousel-card-sub">Morgaon Ashtavinayak</div>
+        </div>
+      </a>
+      <a href="index.html?mode=puzzle" class="carousel-card">
+        <img src="assets/images/marble.jpg" alt="Peshwe Marble" loading="lazy">
+        <div class="carousel-card-info">
+          <div class="carousel-card-title">Peshwe Marble</div>
+          <div class="carousel-card-sub">Pure White Stone Murti</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="prevBtn" aria-label="Previous">&larr;</button>
+      <div class="carousel-dots" id="carouselDots">
+        <span class="carousel-dot active"></span>
+        <span class="carousel-dot"></span>
+        <span class="carousel-dot"></span>
+        <span class="carousel-dot"></span>
+        <span class="carousel-dot"></span>
+      </div>
+      <button class="carousel-btn" id="nextBtn" aria-label="Next">&rarr;</button>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     HOW IT WORKS — TIMELINE
+     ========================================================================== -->
+<section class="section-wrapper timeline-section" id="how">
+  <div class="section-header">
+    <span class="eyebrow-badge">🎮 HOW IT WORKS</span>
+    <h2 class="section-title">Three Sacred Steps, Infinite Bliss</h2>
+    <p class="section-subtitle">Follow the complete festival journey from assembly to sacred immersion.</p>
+  </div>
+
+  <div class="timeline-container">
+    <div class="timeline-track-line">
+      <div class="timeline-progress-fill" id="timelineProgress"></div>
+    </div>
+
+    <div class="timeline-steps-grid">
+      <div class="timeline-step-card">
+        <div class="step-number-badge">1</div>
+        <span class="step-icon">🧩</span>
+        <h3 class="step-title">Solve the Puzzle</h3>
+        <p class="step-desc">Assemble sacred murti jigsaw pieces across 500 levels using the darshan reference guide. Earn 3 stars to unlock next idols.</p>
+      </div>
+
+      <div class="timeline-step-card">
+        <div class="step-number-badge">2</div>
+        <span class="step-icon">🎨</span>
+        <h3 class="step-title">Color &amp; Adorn the Murti</h3>
+        <p class="step-desc">Take the exact same idol into the Paint Studio to decorate with 24K Gold, auspicious sindoor, turmeric, and divine brush strokes.</p>
+      </div>
+
+      <div class="timeline-step-card">
+        <div class="step-number-badge">3</div>
+        <span class="step-icon">🌊</span>
+        <h3 class="step-title">Sacred Visarjan Immersion</h3>
+        <p class="step-desc">Calibrate the crane claw (+/−), lift the murti, and immerse it into sacred river waters amidst dhol-tasha beats for divine blessings!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     5 FESTIVAL ENVIRONMENTS SHOWCASE
+     ========================================================================== -->
+<section class="section-wrapper env-section" id="environments">
+  <div class="section-header">
+    <span class="eyebrow-badge">🛕 SACRED GHATS</span>
+    <h2 class="section-title">5 Holy Immersion Ghats</h2>
+    <p class="section-subtitle">Each ghat offers its own distinct atmosphere, devotional audio, and scenic riverside view.</p>
+  </div>
+
+  <div class="env-interactive-container">
+    <div class="env-tabs" id="envTabs">
+      <button class="env-tab-btn active" data-img="assets/images/nimarjanam_bg.jpg" data-title="🌊 Mystic Lake" data-desc="Serene mountain lake with waterfall mist, floating flower diyas, and gentle glowing waters.">🌊 Mystic Lake</button>
+      <button class="env-tab-btn" data-img="assets/images/ghat_river.jpg" data-title="🏞️ Holy River" data-desc="Sacred Ganga-Godavari riverbank bathed in warm golden sunset light with devotional evening hymns.">🏞️ Holy River</button>
+      <button class="env-tab-btn" data-img="assets/images/ghat_night.jpg" data-title="🌕 Full Moon Night" data-desc="Celestial Poornima moonlight reflecting across dark shimmering waters and twinkling night stars.">🌕 Full Moon Night</button>
+      <button class="env-tab-btn" data-img="assets/images/ghat_greenery.jpg" data-title="🌴 Lush Greenery" data-desc="Peaceful riverside sanctuary surrounded by green coconut groves, cool breezes, and dancing fireflies.">🌴 Lush Greenery</button>
+      <button class="env-tab-btn" data-img="assets/images/ghat_temple.jpg" data-title="🛕 Temple Ghat" data-desc="Grand temple gopuram steps decorated with fresh marigold garlands, brass bells, and glowing lamps.">🛕 Temple Ghat</button>
+    </div>
+
+    <div class="env-display-stage">
+      <img src="assets/images/nimarjanam_bg.jpg" alt="Environment" class="env-bg-img" id="envDisplayImg">
+      <div class="env-overlay-info">
+        <div class="env-info-left">
+          <h3 id="envTitle">🌊 Mystic Lake</h3>
+          <p id="envDesc">Serene mountain lake with waterfall mist, floating flower diyas, and gentle glowing waters.</p>
+        </div>
+        <a href="index.html?mode=nimarjanam" class="btn-nav-play" style="padding:12px 24px;">Immerse in this Ghat &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     FEATURES GRID — CAPABILITIES
+     ========================================================================== -->
+<section class="section-wrapper features-section" id="features">
+  <div class="section-header">
+    <span class="eyebrow-badge">✨ FESTIVAL HIGHLIGHTS</span>
+    <h2 class="section-title">Engineered for Authentic Celebration</h2>
+    <p class="section-subtitle">Experience rich interactive gameplay backed by authentic cultural sound and artistic detail.</p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-box">
+      <span class="feature-icon-wrap">🌊</span>
+      <h3 class="feature-title">Living Animated River</h3>
+      <p class="feature-desc">Real-time canvas flowing water with floating lotus diyas, swimming ripples, and flying birds in the sky.</p>
+    </div>
+
+    <div class="feature-box">
+      <span class="feature-icon-wrap">🏗️</span>
+      <h3 class="feature-title">Precision Adjustable Crane</h3>
+      <p class="feature-desc">Fine-tune the crane claw size with (+ / −) controls to fit each idol before lifting for authentic visarjan.</p>
+    </div>
+
+    <div class="feature-box">
+      <span class="feature-icon-wrap">🎵</span>
+      <h3 class="feature-title">Sacred Festival Audio</h3>
+      <p class="feature-desc">Authentic synthesized brass temple bells, conch (shankha), tanpura drone, and high-energy dhol-tasha beats.</p>
+    </div>
+
+    <div class="feature-box">
+      <span class="feature-icon-wrap">🛕</span>
+      <h3 class="feature-title">5 Ghat Atmospheres</h3>
+      <p class="feature-desc">Switch seamlessly between Mystic Lake, Holy River, Full Moon Night, Lush Greenery, and Temple Ghat.</p>
+    </div>
+
+    <div class="feature-box">
+      <span class="feature-icon-wrap">📊</span>
+      <h3 class="feature-title">Progress Tracker</h3>
+      <p class="feature-desc">All 500 puzzles, 500 paintings, and 500 visarjans are automatically saved locally and persist on reload.</p>
+    </div>
+
+    <div class="feature-box">
+      <span class="feature-icon-wrap">🎨</span>
+      <h3 class="feature-title">24K Paint Studio</h3>
+      <p class="feature-desc">Paint with sacred Indian festival colors: 24K gold foil, auspicious sindoor, turmeric, and Navagraha shades.</p>
+    </div>
+
+    <div class="feature-box">
+      <span class="feature-icon-wrap">📱</span>
+      <h3 class="feature-title">100% Mobile Friendly</h3>
+      <p class="feature-desc">Intuitive touch controls designed for smartphones and tablets. No app download needed &mdash; just open and play!</p>
+    </div>
+
+    <div class="feature-box">
+      <span class="feature-icon-wrap">🏆</span>
+      <h3 class="feature-title">Achievements System</h3>
+      <p class="feature-desc">Unlock stars, golden laddus, divine badges, and special titles as you advance through festival milestones.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     FINAL EMOTIONAL CTA SECTION
+     ========================================================================== -->
+<section class="final-cta-section">
+  <div class="final-mandala-watermark"></div>
+  <div class="cta-glow-disc"></div>
+
+  <div class="final-cta-content">
+    <span class="eyebrow-badge" style="color:var(--color-terracotta-dark);">🪔 START YOUR FESTIVAL NOW 🪔</span>
+    <h2 class="final-heading">Ganpati Bappa Morya!</h2>
+    <p class="final-subtext">Begin your 500-level festival journey today. Completely free &bull; No download needed &bull; Play directly in your browser!</p>
+    <a href="index.html" class="btn-primary-magnetic" style="font-size:20px;padding:20px 52px;">
+      <span class="btn-aura"></span>
+      <span>🎮</span> Play Now &mdash; Start Festival!
+    </a>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     FOOTER
+     ========================================================================== -->
+<footer>
+  <div class="footer-om">ॐ</div>
+  <p class="footer-text">
+    <strong>Shree Vinayaka Chavithi Divine Mahotsav</strong> &mdash; Ganesh Chaturthi Web Game<br>
+    <strong>3 Games</strong> &bull; <strong>500 Divine Murtis</strong> &bull; <strong>5 Sacred Ghats</strong> &bull; <strong>Authentic Festival Audio</strong><br>
+    Ganpati Bappa Morya 🪔 Pudhchya Varshi Lavkar Ya!
+  </p>
+</footer>
+
+
+<!-- ==========================================================================
+     PLAYER DETAILS MODAL (NAME & ID CAPTURE)
+     ========================================================================== -->
+<div class="player-modal-backdrop" id="playerModalBackdrop" aria-hidden="true">
+  <div class="player-modal-card" id="playerModalCard">
+    <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+    
+    <div class="modal-header-block">
+      <h2 class="modal-main-title">Enter Your Name</h2>
+      <p class="modal-subtitle">Mention your name to begin the festival journey!</p>
+    </div>
+
+    <form class="player-form" id="playerProfileForm">
+      <div class="form-group">
+        <label for="playerDisplayName">Your Name</label>
+        <input type="text" id="playerDisplayName" class="form-input" placeholder="e.g. Rahul" autocomplete="name" autofocus>
+        <div class="error-text-hint" id="nameErrorHint">Please enter your name to proceed!</div>
+      </div>
+
+      <button type="button" class="btn-modal-save" id="btnModalSave">
+        Save &amp; Play Game &rarr;
+      </button>
+      <div style="text-align: center; margin-top: 14px;">
+        <a href="index.html" id="directPlayLink" style="font-size: 13px; color: var(--color-terracotta-dark); text-decoration: underline; font-weight: 600;">Directly Open Game &rarr;</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Include Audio Synthesizer -->
+<script src="js/audio.js"></script>
+
+<!-- ==========================================================================
+     SCRIPTS & INTERACTIONS
+     ========================================================================== -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // --- 1. Audio Controller ---
+  const audio = window.sacredAudio || (window.SacredAudioEngine ? new window.SacredAudioEngine() : null);
+  const bellBtn = document.getElementById('navBellBtn');
+  if (bellBtn && audio) {
+    bellBtn.addEventListener('click', () => {
+      audio.init();
+      audio.playTempleBell(880, 2.8);
+      audio.playShankha(2.0);
+      bellBtn.style.transform = 'scale(0.92)';
+      setTimeout(() => bellBtn.style.transform = 'scale(1)', 150);
+    });
+  }
+
+  // --- 2. Custom Cursor Aura (Desktop Only) ---
+  const cursorDot = document.getElementById('cursor-dot');
+  const cursorAura = document.getElementById('cursor-aura');
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && cursorDot && cursorAura) {
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let auraX = mouseX, auraY = mouseY;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.left = `${mouseX}px`;
+      cursorDot.style.top = `${mouseY}px`;
+    }, { passive: true });
+
+    function renderCursor() {
+      auraX += (mouseX - auraX) * 0.18;
+      auraY += (mouseY - auraY) * 0.18;
+      cursorAura.style.left = `${auraX}px`;
+      cursorAura.style.top = `${auraY}px`;
+      requestAnimationFrame(renderCursor);
+    }
+    requestAnimationFrame(renderCursor);
+
+    document.querySelectorAll('a, button, .cinematic-game-card, .carousel-card, .feature-box').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+  }
+
+  // --- 3. Ambient Particles Canvas (Golden Dust & Flower Petals) ---
+  const canvas = document.getElementById('particles-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }, { passive: true });
+
+    const numParticles = window.innerWidth < 768 ? 25 : 55;
+    const particles = [];
+
+    for (let i = 0; i < numParticles; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 2.2 + 0.8,
+        speedY: -(Math.random() * 0.4 + 0.15),
+        speedX: (Math.random() - 0.5) * 0.3,
+        opacity: Math.random() * 0.5 + 0.2,
+        isPetal: Math.random() > 0.65,
+        rotation: Math.random() * 360,
+        rotSpeed: (Math.random() - 0.5) * 1.2
+      });
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+
+      particles.forEach(p => {
+        p.y += p.speedY;
+        p.x += p.speedX;
+        p.rotation += p.rotSpeed;
+
+        if (p.y < -20) { p.y = height + 20; p.x = Math.random() * width; }
+        if (p.x < -20) p.x = width + 20;
+        if (p.x > width + 20) p.x = -20;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rotation * Math.PI) / 180);
+
+        if (p.isPetal) {
+          ctx.beginPath();
+          ctx.ellipse(0, 0, p.radius * 2.2, p.radius * 1.2, 0, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(226, 149, 120, ${p.opacity * 0.7})`;
+          ctx.fill();
+        } else {
+          ctx.beginPath();
+          ctx.arc(0, 0, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(197, 125, 86, ${p.opacity})`;
+          ctx.shadowBlur = 6;
+          ctx.shadowColor = '#e29578';
+          ctx.fill();
+        }
+        ctx.restore();
+      });
+
+      requestAnimationFrame(animateParticles);
+    }
+    requestAnimationFrame(animateParticles);
+  }
+
+  // --- 4. Mouse Parallax on Hero ---
+  const heroSection = document.getElementById('hero');
+  const heroGanesh = document.getElementById('heroGaneshImg');
+  if (heroSection && heroGanesh && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    heroSection.addEventListener('mousemove', (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      heroGanesh.style.transform = `translate3d(${x * 16}px, ${y * 16}px, 0)`;
+    }, { passive: true });
+  }
+
+  // --- 5. Magnetic CTA Button ---
+  const magBtn = document.getElementById('heroPrimaryCta');
+  if (magBtn && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    magBtn.addEventListener('mousemove', (e) => {
+      const rect = magBtn.getBoundingClientRect();
+      const x = e.clientX - (rect.left + rect.width / 2);
+      const y = e.clientY - (rect.top + rect.height / 2);
+      magBtn.style.transform = `translate3d(${x * 0.18}px, ${y * 0.18}px, 0) scale(1.04)`;
+    });
+    magBtn.addEventListener('mouseleave', () => {
+      magBtn.style.transform = 'translate3d(0, 0, 0) scale(1)';
+    });
+  }
+
+  // --- 6. Card Spotlight Follower ---
+  document.querySelectorAll('.cinematic-game-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  });
+
+  // --- 7. Stats Counter Animation on Viewport Enter ---
+  const statNumbers = document.querySelectorAll('.stat-number');
+  let statsTriggered = false;
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !statsTriggered) {
+        statsTriggered = true;
+        statNumbers.forEach(stat => {
+          const target = parseInt(stat.getAttribute('data-target'), 10) || 0;
+          let current = 0;
+          const duration = 1800;
+          const stepTime = 25;
+          const increment = target / (duration / stepTime);
+
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+              stat.textContent = target + (target >= 500 ? '+' : '');
+              clearInterval(timer);
+            } else {
+              stat.textContent = Math.floor(current);
+            }
+          }, stepTime);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const statsSection = document.querySelector('.stats-strip-section');
+  if (statsSection) statsObserver.observe(statsSection);
+
+  // --- 8. Murti Carousel Drag & Nav Controls ---
+  const track = document.getElementById('carouselTrack');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  if (track && prevBtn && nextBtn) {
+    let isDown = false;
+    let startX, scrollLeft;
+
+    track.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    });
+    track.addEventListener('mouseleave', () => isDown = false);
+    track.addEventListener('mouseup', () => isDown = false);
+    track.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - track.offsetLeft;
+      const walk = (x - startX) * 1.8;
+      track.scrollLeft = scrollLeft - walk;
+    });
+
+    prevBtn.addEventListener('click', () => {
+      track.scrollBy({ left: -280, behavior: 'smooth' });
+    });
+    nextBtn.addEventListener('click', () => {
+      track.scrollBy({ left: 280, behavior: 'smooth' });
+    });
+
+    let autoScroll = setInterval(() => {
+      if (!isDown) {
+        if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+          track.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          track.scrollBy({ left: 260, behavior: 'smooth' });
+        }
+      }
+    }, 4500);
+
+    track.addEventListener('mouseenter', () => clearInterval(autoScroll));
+    track.addEventListener('mouseleave', () => {
+      autoScroll = setInterval(() => {
+        if (!isDown) {
+          if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+            track.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            track.scrollBy({ left: 260, behavior: 'smooth' });
+          }
+        }
+      }, 4500);
+    });
+  }
+
+  // --- 9. Environment Tabs Switcher ---
+  const envBtns = document.querySelectorAll('.env-tab-btn');
+  const envImg = document.getElementById('envDisplayImg');
+  const envTitle = document.getElementById('envTitle');
+  const envDesc = document.getElementById('envDesc');
+
+  envBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      envBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const imgPath = btn.getAttribute('data-img');
+      const title = btn.getAttribute('data-title');
+      const desc = btn.getAttribute('data-desc');
+
+      if (envImg) {
+        envImg.style.opacity = '0.3';
+        envImg.style.transform = 'scale(1.04)';
+        setTimeout(() => {
+          envImg.src = imgPath;
+          envImg.style.opacity = '1';
+          envImg.style.transform = 'scale(1)';
+        }, 250);
+      }
+      if (envTitle) envTitle.textContent = title;
+      if (envDesc) envDesc.textContent = desc;
+    });
+  });
+
+  // --- 10. Nav Bar Scroll Blur ---
+  const nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }, { passive: true });
+
+  // --- 11. GSAP Hero Entrance Sequence ---
+  if (typeof gsap !== 'undefined') {
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    tl.from('.hero-badge-wrap', { opacity: 0, y: -20, duration: 0.8, delay: 0.2 })
+      .from('#heroTitle', { opacity: 0, y: 30, duration: 1 }, '-=0.4')
+      .from('.hero-mantra', { opacity: 0, y: 15, duration: 0.7 }, '-=0.5')
+      .from('.hero-description', { opacity: 0, y: 20, duration: 0.8 }, '-=0.4')
+      .from('.hero-cta-group', { opacity: 0, y: 25, duration: 0.8 }, '-=0.5')
+      .from('#heroVisual', { opacity: 0, scale: 0.9, duration: 1.2, ease: 'back.out(1.2)' }, '-=1.2');
+  }
+
+
+  // --- 12. Player Name Modal on Click Anywhere to Open Game ---
+  let pendingLaunchUrl = 'index.html';
+  const playerBackdrop = document.getElementById('playerModalBackdrop');
+  const playerForm = document.getElementById('playerProfileForm');
+  const nameInput = document.getElementById('playerDisplayName');
+  const nameError = document.getElementById('nameErrorHint');
+  const modalClose = document.getElementById('modalCloseBtn');
+  const saveBtn = document.getElementById('btnModalSave');
+  const directLink = document.getElementById('directPlayLink');
+
+  function launchGame(targetUrl) {
+    const url = targetUrl || pendingLaunchUrl || 'index.html';
+    window.location.href = url;
+  }
+
+  function openPlayerModal(targetUrl) {
+    pendingLaunchUrl = targetUrl || 'index.html';
+    try {
+      const savedName = localStorage.getItem('ganesh_player_name');
+      if (savedName && savedName.trim()) {
+        launchGame(pendingLaunchUrl);
+        return;
+      }
+    } catch(e) {}
+
+    if (playerBackdrop) {
+      playerBackdrop.classList.add('active');
+      playerBackdrop.setAttribute('aria-hidden', 'false');
+      if (nameInput) setTimeout(() => nameInput.focus(), 120);
+    } else {
+      launchGame(pendingLaunchUrl);
+    }
+  }
+
+  function closePlayerModal() {
+    if (playerBackdrop) {
+      playerBackdrop.classList.remove('active');
+      playerBackdrop.setAttribute('aria-hidden', 'true');
+    }
+    if (nameError) nameError.style.display = 'none';
+  }
+
+  // Intercept every game launch link or button on landing page
+  document.querySelectorAll('a[href*="index.html"], .btn-nav-play, .btn-primary-magnetic, .btn-card-launch, .btn-card-roadmap, .carousel-card').forEach(el => {
+    el.addEventListener('click', (e) => {
+      let target = 'index.html';
+      if (el.dataset.target) {
+        target = el.dataset.target;
+      } else if (el.tagName === 'A' && el.getAttribute('href')) {
+        target = el.getAttribute('href');
+      } else {
+        const parentLink = el.closest('a');
+        if (parentLink && parentLink.getAttribute('href')) {
+          target = parentLink.getAttribute('href');
+        }
+      }
+
+      // If user already entered their name before, DO NOT block them! Open game instantly!
+      try {
+        const savedName = localStorage.getItem('ganesh_player_name');
+        if (savedName && savedName.trim()) {
+          window.location.href = target;
+          return;
+        }
+      } catch(err) {}
+
+      e.preventDefault();
+      e.stopPropagation();
+      openPlayerModal(target);
+    });
+  });
+
+  if (modalClose) {
+    modalClose.addEventListener('click', (e) => {
+      e.preventDefault();
+      closePlayerModal();
+      launchGame(pendingLaunchUrl);
+    });
+  }
+
+  if (playerBackdrop) {
+    playerBackdrop.addEventListener('click', (e) => {
+      if (e.target === playerBackdrop) {
+        closePlayerModal();
+        launchGame(pendingLaunchUrl);
+      }
+    });
+  }
+
+  function handleSaveAndLaunch(e) {
+    if (e) e.preventDefault();
+    let name = nameInput ? nameInput.value.trim() : '';
+    if (!name) name = 'Bhakt';
+
+    try {
+      localStorage.setItem('ganesh_player_name', name);
+      const rawTracker = localStorage.getItem('ganesh_chaturthi_game_v1');
+      let trackerObj = rawTracker ? JSON.parse(rawTracker) : {};
+      trackerObj.playerProfile = { displayName: name };
+      localStorage.setItem('ganesh_chaturthi_game_v1', JSON.stringify(trackerObj));
+    } catch(err) {
+      console.warn('Could not save to localStorage', err);
+    }
+
+    if (saveBtn) {
+      saveBtn.innerHTML = '✨ Welcome, ' + name + '! Launching...';
+      saveBtn.style.background = '#2e7d32';
+    }
+
+    setTimeout(() => {
+      launchGame(pendingLaunchUrl);
+    }, 200);
+  }
+
+  if (saveBtn) saveBtn.addEventListener('click', handleSaveAndLaunch);
+  if (playerForm) playerForm.addEventListener('submit', handleSaveAndLaunch);
+  if (nameInput) {
+    nameInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') handleSaveAndLaunch(e);
+    });
+  }
+  if (directLink) {
+    directLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      launchGame(pendingLaunchUrl);
+    });
+  }
+
+});
+</script>
+</body>
+</html>

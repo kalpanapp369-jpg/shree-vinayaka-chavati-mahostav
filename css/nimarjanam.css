@@ -1,0 +1,1333 @@
+/* ==========================================================================
+   Game 3: Ganesh Nimajjanam Immersion (Exact Replica of 'naveen.immersion')
+   Aesthetic Peach & Calm Warmth Theme (ప్రశాంత దివ్య శోభ)
+   ========================================================================== */
+
+.nimarjanam-game-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Master Viewport Container */
+.nimarjanam-ghat-viewport {
+    position: relative;
+    width: 100%;
+    height: 560px;
+    max-height: 82vh;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 2.5px solid var(--color-terracotta);
+    box-shadow: 0 14px 44px rgba(197, 125, 86, 0.22), 0 0 25px rgba(252, 213, 192, 0.5);
+    background: #020611;
+    user-select: none;
+    touch-action: none;
+}
+
+#nimarjanam-water-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 1;
+}
+
+/* ==========================================================================
+   Top Arcade HUD Overlay (Peach Glass Aesthetic)
+   ========================================================================== */
+.arcade-hud-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.arcade-hud-overlay * {
+    pointer-events: auto;
+}
+
+/* Circular Crane Claw / Zoom Buttons (Top-Left) */
+.hud-zoom-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.hud-circle-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #ffffff 0%, #ffe8dc 60%, #fcd5c0 100%);
+    border: 2px solid var(--color-terracotta);
+    box-shadow: 0 4px 12px rgba(197, 125, 86, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.12s ease, filter 0.12s ease, box-shadow 0.15s ease;
+    outline: none;
+}
+
+.hud-circle-btn span {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--color-terracotta-dark);
+    line-height: 1;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.9);
+}
+
+.hud-circle-btn:active {
+    transform: scale(0.92);
+    filter: brightness(0.95);
+}
+
+.hud-claw-badge {
+    background: rgba(30, 20, 15, 0.88);
+    border: 1.5px solid #ffd54f;
+    color: #fff9c4;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-family: 'Outfit', sans-serif;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+}
+
+.pulse-glow {
+    animation: btnGlowPulse 0.35s ease infinite alternate;
+}
+
+@keyframes btnGlowPulse {
+    from {
+        box-shadow: 0 0 6px #ffab00, 0 0 14px #ffd600;
+        transform: scale(1.08);
+        border-color: #ffd600;
+    }
+    to {
+        box-shadow: 0 0 16px #ff6d00, 0 0 28px #ffab00;
+        transform: scale(1.18);
+        border-color: #ff6d00;
+    }
+}
+
+/* 3D Glossy Score Display (Top-Center) */
+.hud-score-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.hud-score-badge {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    background: rgba(255, 248, 244, 0.92);
+    padding: 4px 20px 6px 18px;
+    border-radius: 30px;
+    border: 1.5px solid var(--color-terracotta);
+    box-shadow: 0 4px 16px rgba(197, 125, 86, 0.25), 0 0 15px rgba(252, 213, 192, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+.score-3d-text {
+    font-family: 'Outfit', 'Montserrat', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    background: linear-gradient(180deg, #341e15 0%, #c57d56 60%, #e29578 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: lowercase;
+}
+
+.score-val-text {
+    font-family: 'Plus Jakarta Sans', 'Impact', sans-serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--color-cocoa);
+    letter-spacing: 0.5px;
+}
+
+.hud-laddu-pill {
+    background: rgba(255, 248, 244, 0.92);
+    border: 1.5px solid var(--color-terracotta);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: var(--color-terracotta-dark);
+    box-shadow: 0 3px 10px rgba(197, 125, 86, 0.2);
+    backdrop-filter: blur(8px);
+}
+
+/* Level & Idols Badges in Arcade HUD */
+.hud-level-badge {
+    background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
+    border: 1.5px solid #ea580c;
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: #9a3412;
+    box-shadow: 0 3px 10px rgba(234, 88, 12, 0.25);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    backdrop-filter: blur(8px);
+}
+.hlb-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.8px;
+    font-weight: 900;
+    color: #c2410c;
+}
+.hlb-val {
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: #7c2d12;
+}
+
+.hud-idols-badge {
+    background: rgba(255, 248, 244, 0.95);
+    border: 1.5px solid #2563eb;
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: #1e40af;
+    box-shadow: 0 3px 10px rgba(37, 99, 235, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    backdrop-filter: blur(8px);
+}
+.hib-icon {
+    font-size: 1.05rem;
+}
+.hib-val {
+    font-size: 1.05rem;
+    font-weight: 900;
+    color: #1e3a8a;
+}
+
+/* Timer Display & Mini Actions (Top-Right) */
+.hud-timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.hud-timer-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(52, 30, 21, 0.88);
+    border: 2px solid #e29578;
+    border-radius: 24px;
+    padding: 4px 14px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 12px rgba(226, 149, 120, 0.5);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+}
+
+.hud-timer-badge.timer-urgent {
+    background: rgba(185, 28, 28, 0.92);
+    border-color: #f87171;
+    animation: timerUrgentPulse 0.9s infinite alternate ease-in-out;
+}
+
+@keyframes timerUrgentPulse {
+    0% { transform: scale(1); box-shadow: 0 0 10px rgba(239, 68, 68, 0.6); }
+    100% { transform: scale(1.06); box-shadow: 0 0 25px rgba(239, 68, 68, 0.95); }
+}
+
+.timer-icon {
+    font-size: 1.15rem;
+}
+
+.timer-digits-3d {
+    font-family: 'Impact', 'Arial Black', sans-serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(52, 30, 21, 0.8), 0 0 12px rgba(226, 149, 120, 0.85);
+    line-height: 1;
+}
+
+.timer-sec-pill {
+    background: rgba(226, 149, 120, 0.35);
+    color: #fcd5c0;
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 10px;
+    border: 1px solid rgba(226, 149, 120, 0.5);
+}
+
+.hud-mini-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.hud-mini-btn {
+    background: rgba(255, 248, 244, 0.9);
+    color: var(--color-cocoa);
+    border: 1.5px solid var(--color-terracotta);
+    border-radius: 8px;
+    padding: 5px 12px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(197, 125, 86, 0.15);
+    transition: all 0.2s;
+}
+
+.hud-mini-btn:hover {
+    background: linear-gradient(135deg, #e29578, #c57d56);
+    color: #ffffff;
+    border-color: #c57d56;
+}
+
+/* ==========================================================================
+   Large Triangular Arrow Controls
+   ========================================================================== */
+.arcade-arrow-controls {
+    position: absolute;
+    z-index: 25;
+    display: flex;
+    pointer-events: auto;
+}
+
+/* Top-Right Hoist Controls: Up ▲ and Down ▼ */
+.top-right-hoist {
+    top: 75px;
+    right: 18px;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Bottom-Left Trolley Controls: Left ◀ and Right ▶ */
+.bottom-left-trolley {
+    bottom: 22px;
+    left: 24px;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.orange-triangle-btn {
+    width: 68px;
+    height: 68px;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.85));
+    transition: transform 0.08s ease, filter 0.08s ease;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.orange-triangle-btn:active,
+.orange-triangle-btn.active {
+    transform: scale(0.90);
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.9)) brightness(1.15);
+}
+
+/* CSS Pure Triangle Shapes matching the aesthetic */
+.triangle-shape {
+    width: 0;
+    height: 0;
+    position: relative;
+}
+
+/* Up Triangle ▲ */
+.shape-up {
+    border-left: 32px solid transparent;
+    border-right: 32px solid transparent;
+    border-bottom: 50px solid #e29578;
+    filter: drop-shadow(0 0 8px rgba(226, 149, 120, 0.9));
+}
+.shape-up::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: -20px;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 30px solid #fcd5c0;
+}
+
+/* Down Triangle ▼ */
+.shape-down {
+    border-left: 32px solid transparent;
+    border-right: 32px solid transparent;
+    border-top: 50px solid #e29578;
+    filter: drop-shadow(0 0 8px rgba(226, 149, 120, 0.9));
+}
+.shape-down::after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    left: -20px;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 30px solid #fcd5c0;
+}
+
+/* Left Triangle ◀ */
+.shape-left {
+    border-top: 32px solid transparent;
+    border-bottom: 32px solid transparent;
+    border-right: 50px solid #e29578;
+    filter: drop-shadow(0 0 8px rgba(226, 149, 120, 0.9));
+}
+.shape-left::after {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: -20px;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 30px solid #fcd5c0;
+}
+
+/* Right Triangle ▶ */
+.shape-right {
+    border-top: 32px solid transparent;
+    border-bottom: 32px solid transparent;
+    border-left: 50px solid #e29578;
+    filter: drop-shadow(0 0 8px rgba(226, 149, 120, 0.9));
+}
+.shape-right::after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: -20px;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 30px solid #fcd5c0;
+}
+
+/* ==========================================================================
+   Instruction / Status Cue Pill & Context Action Button
+   ========================================================================== */
+.arcade-status-pill {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 248, 244, 0.95);
+    border: 1.5px solid var(--color-terracotta);
+    padding: 6px 18px;
+    border-radius: 26px;
+    color: var(--color-cocoa);
+    font-size: 0.92rem;
+    font-weight: 700;
+    z-index: 28;
+    box-shadow: 0 6px 22px rgba(197, 125, 86, 0.25);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
+    backdrop-filter: blur(8px);
+}
+
+.btn-context-action {
+    background: linear-gradient(135deg, #e29578 0%, #c57d56 60%, #b06d48 100%);
+    color: #ffffff;
+    border: 1.5px solid rgba(255, 255, 255, 0.8);
+    border-radius: 18px;
+    padding: 6px 18px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(197, 125, 86, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.6);
+    transition: all 0.15s ease;
+    animation: actionPulse 2s infinite ease-in-out;
+}
+
+.btn-context-action:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+    box-shadow: 0 6px 20px rgba(197, 125, 86, 0.6);
+}
+
+.btn-context-action:active {
+    transform: scale(0.95);
+}
+
+@keyframes actionPulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(226, 149, 120, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(226, 149, 120, 0.9), 0 0 28px rgba(252, 213, 192, 0.7);
+    }
+}
+
+/* Floating Score Notifications Layer */
+.floating-scores-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 30;
+}
+
+.floating-score-item {
+    position: absolute;
+    font-family: 'Impact', 'Arial Black', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #e29578;
+    text-shadow: 0 2px 0 #341e15, 0 0 15px #fcd5c0, 0 4px 10px rgba(0, 0, 0, 0.8);
+    animation: floatUpFade 1.6s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+    transform: translate(-50%, -50%);
+}
+
+.floating-score-item.bonus-score {
+    color: #88a892;
+    text-shadow: 0 2px 0 #1b5e20, 0 0 15px #cce3de;
+}
+
+@keyframes floatUpFade {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 0) scale(0.6);
+    }
+    15% {
+        opacity: 1;
+        transform: translate(-50%, -20px) scale(1.2);
+    }
+    70% {
+        opacity: 1;
+        transform: translate(-50%, -50px) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -80px) scale(0.8);
+    }
+}
+
+/* ==========================================================================
+   Grand Immersion Celebration Modal Banner (Peach Glass Theme)
+   ========================================================================== */
+.nimarjanam-chant-banner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.85);
+    background: rgba(255, 248, 244, 0.97);
+    border: 2.5px solid var(--color-terracotta);
+    border-radius: var(--radius-lg);
+    padding: 28px 34px;
+    text-align: center;
+    z-index: 40;
+    box-shadow: 0 20px 60px rgba(52, 30, 21, 0.35), 0 0 40px rgba(252, 213, 192, 0.8);
+    display: none;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-width: 540px;
+    width: 90%;
+    color: var(--color-cocoa);
+    backdrop-filter: blur(16px);
+}
+
+.nimarjanam-chant-banner.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.chant-slogan {
+    font-family: var(--font-heading);
+    font-size: 1.55rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #341e15 0%, #c57d56 50%, #e29578 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 14px;
+}
+
+.score-breakdown-box {
+    background: rgba(252, 213, 192, 0.35);
+    border: 1.5px solid rgba(226, 149, 120, 0.4);
+    border-radius: var(--radius-sm);
+    padding: 14px 20px;
+    margin: 10px 0 16px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sbb-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    color: var(--color-cocoa-light);
+    font-weight: 600;
+}
+
+.sbb-val {
+    font-weight: 700;
+    color: var(--color-terracotta-dark);
+}
+
+.sbb-total {
+    border-top: 1.5px dashed rgba(226, 149, 120, 0.5);
+    padding-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: var(--color-cocoa);
+}
+
+.sbb-val-total {
+    color: var(--color-terracotta-dark);
+}
+
+.chant-blessing-text {
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+    margin-bottom: 18px;
+    line-height: 1.5;
+}
+
+.chant-banner-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* ==========================================================================
+   CANDY CRUSH STYLE LEVEL COMPLETE VICTORY SCORE CARD
+   ========================================================================== */
+.candy-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 10, 6, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    padding: 16px;
+    overflow-y: auto;
+}
+
+.candy-modal-backdrop.active {
+    display: flex;
+    opacity: 1;
+}
+
+.candy-victory-card {
+    position: relative;
+    background: radial-gradient(circle at 50% 15%, #fffaf5 0%, #fdeee2 65%, #f7d6be 100%);
+    border: 3.5px solid #d97706;
+    border-radius: 28px;
+    width: 95%;
+    max-width: 500px;
+    max-height: 94vh;
+    padding: 20px 22px 18px 22px;
+    text-align: center;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.65), 
+                0 0 50px rgba(245, 158, 11, 0.6), 
+                inset 0 2px 5px rgba(255, 255, 255, 0.9);
+    transform: scale(0.7) translateY(40px);
+    animation: candyCardBounceIn 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    overflow-y: auto;
+    overflow-x: hidden;
+    color: #3b1d11;
+    margin: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #f59e0b transparent;
+}
+
+@keyframes candyCardBounceIn {
+    0% { transform: scale(0.6) translateY(50px); opacity: 0; }
+    70% { transform: scale(1.05) translateY(-8px); opacity: 1; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* Rotating Sunburst Rays Background */
+.candy-rays-bg {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: repeating-conic-gradient(
+        from 0deg,
+        rgba(251, 191, 36, 0.12) 0deg 15deg,
+        transparent 15deg 30deg
+    );
+    animation: spinRays 25s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes spinRays {
+    100% { transform: rotate(360deg); }
+}
+
+/* Header Ribbon */
+.candy-header-ribbon {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 8px;
+}
+
+.candy-ribbon-content {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(180deg, #f59e0b 0%, #d97706 55%, #b45309 100%);
+    color: #ffffff;
+    padding: 6px 20px;
+    border-radius: 20px;
+    border: 2px solid #fef3c7;
+    box-shadow: 0 6px 18px rgba(180, 83, 9, 0.45), inset 0 2px 3px rgba(255, 255, 255, 0.6);
+}
+
+.candy-level-title {
+    font-family: 'Impact', 'Arial Black', sans-serif;
+    font-size: 1.45rem;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    text-shadow: 0 2px 4px rgba(120, 53, 15, 0.8);
+    margin: 0;
+}
+
+.candy-sparkle {
+    font-size: 1.15rem;
+    animation: sparkleSpin 2s infinite ease-in-out;
+}
+
+@keyframes sparkleSpin {
+    0%, 100% { transform: scale(0.9) rotate(0deg); }
+    50% { transform: scale(1.2) rotate(15deg); }
+}
+
+.candy-level-sub {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #78350f;
+    margin-top: 4px;
+    margin-bottom: 6px;
+    line-height: 1.35;
+}
+
+/* 3 Stars Container */
+.candy-stars-row {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 12px;
+    margin: 6px 0 10px 0;
+}
+
+.candy-star-slot {
+    position: relative;
+    width: 54px;
+    height: 54px;
+    background: linear-gradient(180deg, #e5e7eb 0%, #9ca3af 100%);
+    border: 3px solid #6b7280;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.4), 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s;
+}
+
+.candy-star-slot.center-star {
+    width: 68px;
+    height: 68px;
+    margin-bottom: 6px;
+}
+
+.candy-star-star {
+    font-size: 1.9rem;
+    color: #4b5563;
+    transition: all 0.3s;
+}
+
+.candy-star-slot.center-star .candy-star-star {
+    font-size: 2.4rem;
+}
+
+.candy-star-slot.achieved {
+    background: linear-gradient(180deg, #fef08a 0%, #facc15 50%, #eab308 100%);
+    border-color: #ca8a04;
+    box-shadow: 0 0 25px rgba(250, 204, 21, 0.95), 0 4px 12px rgba(161, 98, 7, 0.4);
+    animation: candyStarPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.4) forwards;
+}
+
+.candy-star-slot.achieved .candy-star-star {
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(161, 98, 7, 0.8);
+}
+
+@keyframes candyStarPop {
+    0% { transform: scale(0.3) rotate(-30deg); }
+    70% { transform: scale(1.35) rotate(15deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+/* Rolling Score Display */
+.candy-score-display {
+    position: relative;
+    z-index: 1;
+    margin: 4px 0 8px 0;
+}
+
+.candy-score-label {
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.8px;
+    color: #92400e;
+    text-transform: uppercase;
+}
+
+.candy-score-number {
+    font-family: 'Impact', 'Arial Black', sans-serif;
+    font-size: 2.5rem;
+    line-height: 1.05;
+    background: linear-gradient(180deg, #b45309 0%, #78350f 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 4px rgba(180, 83, 9, 0.3));
+    letter-spacing: 1px;
+}
+
+.candy-new-best {
+    display: inline-block;
+    background: linear-gradient(90deg, #ef4444, #f97316);
+    color: #ffffff;
+    font-size: 0.74rem;
+    font-weight: 900;
+    padding: 2px 10px;
+    border-radius: 12px;
+    letter-spacing: 1px;
+    box-shadow: 0 3px 8px rgba(239, 68, 68, 0.4);
+    animation: pulseBest 1s infinite alternate;
+}
+
+@keyframes pulseBest {
+    100% { transform: scale(1.08); }
+}
+
+/* Breakdown Card */
+.candy-breakdown-card {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1.5px solid rgba(217, 119, 6, 0.35);
+    border-radius: 16px;
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.candy-stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.88rem;
+    color: #57301c;
+    font-weight: 700;
+}
+
+.csr-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.csr-val {
+    font-weight: 800;
+    color: #2e180d;
+}
+
+.candy-bonus-pts {
+    color: #15803d;
+    font-weight: 800;
+}
+
+.candy-high-row {
+    border-top: 1.5px dashed rgba(217, 119, 6, 0.35);
+    padding-top: 6px;
+    margin-top: 2px;
+    color: #78350f;
+}
+
+/* Action Buttons (Candy Crush Style Juicy Buttons) */
+.candy-actions-row {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 14px;
+    flex-wrap: wrap;
+}
+
+.btn-candy-primary {
+    flex: 1.2;
+    min-width: 120px;
+    background: linear-gradient(180deg, #22c55e 0%, #16a34a 55%, #15803d 100%);
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 900;
+    padding: 11px 16px;
+    border-radius: 24px;
+    border: 2px solid #bbf7d0;
+    box-shadow: 0 6px 20px rgba(22, 163, 74, 0.45), inset 0 2px 3px rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    transition: all 0.2s;
+    animation: candyBtnPulse 2s infinite ease-in-out;
+}
+
+.btn-candy-primary:hover {
+    transform: scale(1.04);
+    box-shadow: 0 8px 24px rgba(22, 163, 74, 0.65);
+    filter: brightness(1.08);
+}
+
+.btn-candy-primary:active {
+    transform: scale(0.96);
+}
+
+@keyframes candyBtnPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+
+.btn-candy-secondary {
+    flex: 1;
+    min-width: 110px;
+    background: linear-gradient(180deg, #f3f4f6 0%, #e5e7eb 100%);
+    color: #374151;
+    font-size: 0.88rem;
+    font-weight: 800;
+    padding: 11px 14px;
+    border-radius: 24px;
+    border: 2px solid #d1d5db;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-candy-secondary:hover {
+    background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
+    color: #111827;
+    transform: scale(1.03);
+}
+
+.btn-candy-secondary:active {
+    transform: scale(0.96);
+}
+
+.btn-candy-map {
+    flex: 1;
+    min-width: 110px;
+    background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
+    color: #ffffff;
+    font-size: 0.88rem;
+    font-weight: 800;
+    padding: 11px 14px;
+    border-radius: 24px;
+    border: 2px solid #fde68a;
+    box-shadow: 0 5px 16px rgba(217, 119, 6, 0.4), inset 0 2px 2px rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+}
+
+.btn-candy-map:hover {
+    transform: scale(1.04);
+    box-shadow: 0 7px 20px rgba(217, 119, 6, 0.6);
+    filter: brightness(1.1);
+}
+
+.btn-candy-map:active {
+    transform: scale(0.96);
+}
+
+/* Timeout Card Variations */
+.timeout-card {
+    border-color: #dc2626;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7), 0 0 50px rgba(220, 38, 38, 0.45);
+}
+
+.timeout-ribbon .candy-ribbon-content {
+    background: linear-gradient(180deg, #ef4444 0%, #dc2626 55%, #991b1b 100%);
+    border-color: #fecaca;
+    box-shadow: 0 6px 18px rgba(185, 28, 28, 0.45);
+}
+
+/* ==========================================================================
+   Bottom Helper Bar
+   ========================================================================== */
+.arcade-bottom-info-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 248, 244, 0.92);
+    border: 1.5px solid rgba(226, 149, 120, 0.4);
+    border-radius: var(--radius-sm);
+    padding: 10px 18px;
+    color: var(--color-text-muted);
+    font-size: 0.88rem;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(226, 149, 120, 0.12);
+}
+
+.abi-shortcuts strong {
+    color: var(--color-terracotta-dark);
+}
+
+.abi-env-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.env-dropdown-sm {
+    background: #ffffff;
+    color: var(--color-cocoa);
+    border: 1.5px solid var(--color-terracotta);
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .nimarjanam-ghat-viewport {
+        height: 480px;
+    }
+    .score-3d-text {
+        font-size: 20px;
+    }
+    .score-val-text {
+        font-size: 24px;
+    }
+    .timer-digits-3d {
+        font-size: 28px;
+    }
+    .orange-triangle-btn {
+        width: 54px;
+        height: 54px;
+    }
+    .shape-up, .shape-down {
+        border-left-width: 25px;
+        border-right-width: 25px;
+    }
+    .shape-up { border-bottom-width: 40px; }
+    .shape-down { border-top-width: 40px; }
+    
+    .shape-left, .shape-right {
+        border-top-width: 25px;
+        border-bottom-width: 25px;
+    }
+    .shape-left { border-right-width: 40px; }
+    .shape-right { border-left-width: 40px; }
+    
+    .bottom-left-trolley {
+        bottom: 12px;
+        left: 12px;
+        gap: 12px;
+    }
+    .top-right-hoist {
+        top: 60px;
+        right: 12px;
+        gap: 12px;
+    }
+    .arcade-status-pill {
+        font-size: 0.78rem;
+        padding: 4px 10px;
+        bottom: 8px;
+    }
+}
+
+/* ==========================================================================
+   LIVING ANIMATED BACKGROUND SYSTEM (Video-Like Real Water & Birds)
+   ========================================================================== */
+
+/* The background sits behind the canvas (z-index: 0) */
+.nimarjanam-living-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* ---- SKY LAYER ---- */
+.nlb-sky {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        #0a1628 0%,
+        #1a2f52 22%,
+        #2a4a7f 42%,
+        #3d6fa8 58%,
+        #6a9cc2 72%,
+        #a8c8d8 80%,
+        #c8dfe8 85%,
+        #d8e8ee 88%
+    );
+    animation: nlb-sky-shift 18s ease-in-out infinite alternate;
+}
+
+@keyframes nlb-sky-shift {
+    0%   { filter: hue-rotate(0deg) brightness(1.0); }
+    50%  { filter: hue-rotate(8deg) brightness(1.08); }
+    100% { filter: hue-rotate(-5deg) brightness(0.95); }
+}
+
+/* Animated light rays from upper-right (God rays) */
+.nlb-sky::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-conic-gradient(
+        from 65deg at 82% 5%,
+        rgba(255,245,200,0.045) 0deg, transparent 4deg,
+        transparent 8deg, rgba(255,245,200,0.03) 10deg,
+        transparent 14deg
+    );
+    animation: nlb-godrays 12s linear infinite;
+    mix-blend-mode: screen;
+}
+
+@keyframes nlb-godrays {
+    0%   { transform: rotate(0deg); opacity: 0.8; }
+    50%  { opacity: 1.0; }
+    100% { transform: rotate(2deg); opacity: 0.8; }
+}
+
+/* ---- TREELINE SILHOUETTE ---- */
+.nlb-treeline {
+    position: absolute;
+    bottom: 32%;
+    left: 0;
+    width: 100%;
+    height: 22%;
+    /* SVG inline: rolling hills + trees silhouette */
+    background:
+        radial-gradient(ellipse 3% 60% at 5% 100%, #0a1f0a 49%, transparent 50%),
+        radial-gradient(ellipse 2.5% 55% at 9% 100%, #0d260d 49%, transparent 50%),
+        radial-gradient(ellipse 3.5% 70% at 14% 100%, #0a1f0a 49%, transparent 50%),
+        radial-gradient(ellipse 3% 62% at 19% 100%, #112211 49%, transparent 50%),
+        radial-gradient(ellipse 2.5% 58% at 24% 100%, #0a1f0a 49%, transparent 50%),
+        radial-gradient(ellipse 3.2% 65% at 29% 100%, #0d260d 49%, transparent 50%),
+        radial-gradient(ellipse 3% 60% at 34% 100%, #0a1f0a 49%, transparent 50%),
+        radial-gradient(ellipse 2.8% 55% at 39% 100%, #112211 49%, transparent 50%),
+        radial-gradient(ellipse 4% 72% at 45% 100%, #0a1f0a 49%, transparent 50%),
+        radial-gradient(ellipse 3% 62% at 50% 100%, #0d260d 49%, transparent 50%),
+        linear-gradient(to top, #0f2210 0%, #1a3820 35%, transparent 70%);
+    animation: nlb-treeline-drift 30s ease-in-out infinite alternate;
+    opacity: 0.85;
+}
+
+@keyframes nlb-treeline-drift {
+    0%   { transform: translateX(0px); }
+    100% { transform: translateX(-12px); }
+}
+
+/* ---- WATER BODY (right side ~38% of width) ---- */
+.nlb-water-body {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 42%;
+    height: 35%;
+    overflow: hidden;
+}
+
+/* Wave layer base pattern */
+.nlb-wave {
+    position: absolute;
+    left: -60%;
+    width: 220%;
+    height: 100%;
+    border-radius: 45% 55% 0 0 / 12% 12% 0 0;
+    animation: nlb-wave-flow linear infinite;
+    transform-origin: center bottom;
+    opacity: 0.65;
+}
+
+/* Layer 1: Deep water base */
+.nlb-wave-1 {
+    bottom: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(30, 120, 200, 0.70) 0%,
+        rgba(10, 55, 130, 0.88) 40%,
+        rgba(3, 20, 60, 0.96) 100%
+    );
+    animation-name: nlb-wave-flow;
+    animation-duration: 7s;
+    animation-delay: 0s;
+    border-radius: 48% 52% 0 0 / 10% 10% 0 0;
+    opacity: 1.0;
+}
+
+/* Layer 2: Mid water with horizontal shine streaks */
+.nlb-wave-2 {
+    bottom: 2px;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 40px,
+            rgba(255, 255, 255, 0.07) 40px,
+            rgba(255, 255, 255, 0.07) 80px
+        ),
+        linear-gradient(
+            180deg,
+            rgba(60, 150, 220, 0.50) 0%,
+            rgba(20, 80, 160, 0.65) 50%,
+            transparent 100%
+        );
+    animation-name: nlb-wave-flow;
+    animation-duration: 5.2s;
+    animation-delay: -1.5s;
+    border-radius: 52% 48% 0 0 / 14% 14% 0 0;
+    animation-direction: alternate;
+}
+
+/* Layer 3: Surface froth / foam crests */
+.nlb-wave-3 {
+    bottom: 4px;
+    height: 30%;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px, transparent 18px,
+            rgba(255,255,255,0.18) 18px, rgba(255,255,255,0.18) 22px,
+            transparent 22px, transparent 36px,
+            rgba(255,255,255,0.12) 36px, rgba(255,255,255,0.12) 40px
+        );
+    animation-name: nlb-wave-froth;
+    animation-duration: 3.5s;
+    animation-timing-function: linear;
+    border-radius: 0;
+    background-size: 120px 100%;
+    opacity: 0.6;
+}
+
+@keyframes nlb-wave-flow {
+    0%   { transform: translateX(0)   scaleY(1.0); }
+    50%  { transform: translateX(-8%) scaleY(1.03); }
+    100% { transform: translateX(-16%) scaleY(0.97); }
+}
+
+@keyframes nlb-wave-froth {
+    0%   { background-position: 0 0; }
+    100% { background-position: -120px 0; }
+}
+
+/* Water surface shimmer (specular light reflection) */
+.nlb-shimmer {
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(
+            -30deg,
+            transparent 0px,
+            transparent 28px,
+            rgba(255, 248, 200, 0.09) 28px,
+            rgba(255, 248, 200, 0.09) 32px
+        );
+    animation: nlb-shimmer-anim 4s linear infinite;
+    mix-blend-mode: screen;
+}
+
+@keyframes nlb-shimmer-anim {
+    0%   { transform: translateX(-30px) translateY(-5px); opacity: 0.6; }
+    50%  { opacity: 1.0; }
+    100% { transform: translateX(30px)  translateY(5px);  opacity: 0.6; }
+}
+
+/* Caustic underwater light patterns */
+.nlb-caustic {
+    position: absolute;
+    inset: 20% 0 0 0;
+    background:
+        radial-gradient(ellipse 8% 22% at 15% 40%, rgba(255,248,180,0.14) 0%, transparent 70%),
+        radial-gradient(ellipse 5% 15% at 35% 65%, rgba(255,248,180,0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 10% 25% at 58% 35%, rgba(255,248,180,0.13) 0%, transparent 70%),
+        radial-gradient(ellipse 6% 18% at 75% 70%, rgba(255,248,180,0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 8% 20% at 90% 45%, rgba(255,248,180,0.12) 0%, transparent 70%);
+    animation: nlb-caustic-anim 6s ease-in-out infinite alternate;
+    mix-blend-mode: screen;
+}
+
+@keyframes nlb-caustic-anim {
+    0%   { transform: scale(1.0) translateX(0px);  opacity: 0.7; }
+    50%  { transform: scale(1.1) translateX(8px);  opacity: 1.0; }
+    100% { transform: scale(0.95) translateX(-8px); opacity: 0.6; }
+}
+
+/* Environment-specific color adaptation for water */
+#screen-nimarjanam.env-night   .nlb-sky   { background: linear-gradient(180deg, #000208 0%, #020615 20%, #040d28 40%, #081840 60%, #0d2050 75%, #142858 85%, #1c3060 90%, #2a3a68 95%); }
+#screen-nimarjanam.env-night   .nlb-wave-1 { background: linear-gradient(180deg, rgba(15,50,120,0.75) 0%, rgba(5,20,65,0.92) 50%, rgba(1,6,25,0.98) 100%); }
+
+#screen-nimarjanam.env-river   .nlb-sky   { filter: hue-rotate(30deg) saturate(0.85); }
+#screen-nimarjanam.env-river   .nlb-wave-1 { background: linear-gradient(180deg, rgba(140,90,20,0.72) 0%, rgba(80,45,8,0.90) 50%, rgba(25,12,2,0.97) 100%); }
+
+#screen-nimarjanam.env-greenery .nlb-sky  { background: linear-gradient(180deg, #05180a 0%, #0d2e12 25%, #1a4820 45%, #2d6630 60%, #4a8050 72%, #78a860 82%, #9cc070 88%); }
+#screen-nimarjanam.env-greenery .nlb-wave-1 { background: linear-gradient(180deg, rgba(10,140,110,0.72) 0%, rgba(5,80,65,0.90) 50%, rgba(1,22,18,0.97) 100%); }
+
+#screen-nimarjanam.env-village  .nlb-sky  { filter: hue-rotate(15deg) saturate(0.9) brightness(0.95); }
+#screen-nimarjanam.env-village  .nlb-wave-1 { background: linear-gradient(180deg, rgba(120,60,15,0.72) 0%, rgba(70,30,5,0.90) 50%, rgba(18,6,1,0.97) 100%); }
+
+

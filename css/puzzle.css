@@ -1,0 +1,730 @@
+/* ==========================================================================
+   Game 1: Authentic Interlocking Jigsaw & Grid Assembly Puzzle Styles
+   Exact Sacred Temple Aesthetic Theme (దర్శన చిత్రం & ముక్కల పెట్టె)
+   ========================================================================== */
+
+.puzzle-game-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Traditional Indian Filigree Corner Brackets for Cards */
+.card-corner-bracket {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.card-corner-bracket.top-left {
+    top: 7px;
+    left: 7px;
+    border-top: 2px solid #d4a373;
+    border-left: 2px solid #d4a373;
+    border-top-left-radius: 10px;
+}
+
+.card-corner-bracket.top-left::after {
+    content: '◆';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    font-size: 7px;
+    color: #d4a373;
+}
+
+.card-corner-bracket.top-right {
+    top: 7px;
+    right: 7px;
+    border-top: 2px solid #d4a373;
+    border-right: 2px solid #d4a373;
+    border-top-right-radius: 10px;
+}
+
+.card-corner-bracket.top-right::after {
+    content: '◆';
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    font-size: 7px;
+    color: #d4a373;
+}
+
+.card-corner-bracket.bottom-left {
+    bottom: 7px;
+    left: 7px;
+    border-bottom: 2px solid #d4a373;
+    border-left: 2px solid #d4a373;
+    border-bottom-left-radius: 10px;
+}
+
+.card-corner-bracket.bottom-left::after {
+    content: '◆';
+    position: absolute;
+    bottom: -4px;
+    left: -4px;
+    font-size: 7px;
+    color: #d4a373;
+}
+
+.card-corner-bracket.bottom-right {
+    bottom: 7px;
+    right: 7px;
+    border-bottom: 2px solid #d4a373;
+    border-right: 2px solid #d4a373;
+    border-bottom-right-radius: 10px;
+}
+
+.card-corner-bracket.bottom-right::after {
+    content: '◆';
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    font-size: 7px;
+    color: #d4a373;
+}
+
+/* ==========================================================================
+   Top Ornate Control Header Card
+   ========================================================================== */
+.game-control-header {
+    background: rgba(255, 252, 248, 0.96);
+    border: 2px solid rgba(212, 163, 115, 0.8);
+    outline: 1px solid rgba(212, 163, 115, 0.35);
+    outline-offset: -6px;
+    border-radius: 22px;
+    padding: 16px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+    box-shadow: 0 8px 24px rgba(197, 125, 86, 0.12), 0 2px 6px rgba(0, 0, 0, 0.03);
+    backdrop-filter: blur(12px);
+}
+
+.gch-lotus-top {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fdf7ed;
+    padding: 0 8px;
+    font-size: 16px;
+    color: #d4a373;
+    line-height: 1;
+}
+
+.gch-lotus-bottom {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fdf7ed;
+    padding: 0 8px;
+    font-size: 14px;
+    color: #d4a373;
+    line-height: 1;
+}
+
+.gch-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.gch-level-info {
+    flex: 1;
+    min-width: 280px;
+}
+
+.pzh-title {
+    font-family: 'Rozha One', 'Cinzel Decorative', 'Tiro Telugu', serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #78161a; /* Deep crimson/maroon from screenshot */
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    line-height: 1.2;
+}
+
+.pzh-subtitle {
+    font-size: 0.88rem;
+    color: #5c3a2b;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.gch-stats-group {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.stat-pill {
+    background: #fffdfa;
+    border: 1.5px solid rgba(212, 163, 115, 0.75);
+    border-radius: 24px;
+    padding: 6px 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #341e15;
+    box-shadow: 0 2px 6px rgba(180, 110, 70, 0.08);
+}
+
+.stat-icon {
+    font-size: 16px;
+}
+
+.moves-pill .foot-icon {
+    color: #78161a;
+}
+
+.gch-bottom-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    border-top: 1px dashed rgba(212, 163, 115, 0.35);
+    padding-top: 12px;
+}
+
+/* Grid Size Selector Pills (2x2 to 12x12) */
+.grid-size-selector {
+    display: inline-flex;
+    align-items: center;
+    background: #fffdfa;
+    border: 1.5px solid rgba(212, 163, 115, 0.75);
+    border-radius: 24px;
+    padding: 3px 4px;
+    box-shadow: 0 2px 6px rgba(180, 110, 70, 0.08);
+    gap: 2px;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.grid-size-selector::-webkit-scrollbar {
+    display: none;
+}
+
+.grid-size-btn {
+    padding: 5px 9px;
+    background: transparent;
+    border: none;
+    border-radius: 18px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #4a2c1d;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.grid-size-btn:hover {
+    color: #78161a;
+    background: rgba(212, 163, 115, 0.15);
+}
+
+.grid-size-btn.active {
+    background: #78161a; /* Active maroon button */
+    color: #ffffff;
+    box-shadow: 0 2px 6px rgba(120, 22, 26, 0.35);
+}
+
+/* Action Pills (Hint, Restart, Menu) */
+.pzh-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 18px;
+    background: #fffdfa;
+    border: 1.5px solid rgba(212, 163, 115, 0.75);
+    border-radius: 24px;
+    font-family: 'Plus Jakarta Sans', 'Tiro Telugu', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #341e15;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(180, 110, 70, 0.08);
+    transition: all 0.22s ease;
+}
+
+.pzh-action-btn:hover {
+    background: #ffffff;
+    border-color: #78161a;
+    color: #78161a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(197, 125, 86, 0.2);
+}
+
+.pzh-action-btn:active {
+    transform: translateY(1px);
+}
+
+.pzh-action-btn.active {
+    background: #78161a;
+    color: #ffffff;
+    border-color: #78161a;
+}
+
+.btn-emoji {
+    font-size: 15px;
+}
+
+/* ==========================================================================
+   Main 3-Column Arena Layout
+   ========================================================================== */
+.puzzle-arena-layout {
+    display: grid;
+    grid-template-columns: 290px 1.45fr 310px;
+    gap: 20px;
+    align-items: stretch;
+}
+
+/* Panel Common Card Frame */
+.puzzle-reference-panel,
+.puzzle-board-panel,
+.puzzle-tray-panel {
+    background: rgba(255, 252, 248, 0.96);
+    border: 2px solid rgba(212, 163, 115, 0.8);
+    outline: 1px solid rgba(212, 163, 115, 0.35);
+    outline-offset: -6px;
+    border-radius: 22px;
+    padding: 20px 18px;
+    box-shadow: 0 8px 24px rgba(197, 125, 86, 0.12);
+    backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Panel Header Badges */
+.panel-header-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 2px;
+}
+
+.panel-title-telugu {
+    font-family: 'Rozha One', 'Tiro Telugu', serif;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #78161a;
+    letter-spacing: 0.5px;
+}
+
+.lotus-motif {
+    font-size: 16px;
+    color: #d4a373;
+}
+
+.panel-title-sub {
+    font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
+    font-size: 0.82rem;
+    color: #7a5238;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+/* 1. Left Panel: Reference Darshan */
+.ref-canvas-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2.5px solid #d4a373;
+    box-shadow: 0 4px 16px rgba(197, 125, 86, 0.2), inset 0 0 10px rgba(0, 0, 0, 0.05);
+    background: #ffffff;
+    margin-bottom: 16px;
+}
+
+#puzzle-ref-canvas {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.puzzle-darshan-quote-box {
+    margin-top: auto;
+    text-align: center;
+    padding: 10px 8px 0;
+}
+
+.darshan-quote-text {
+    font-family: 'Tiro Telugu', 'Georgia', serif;
+    font-style: italic;
+    font-size: 0.88rem;
+    color: #5c3a2b;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.darshan-quote-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 163, 115, 0.6), transparent);
+}
+
+.divider-lotus {
+    font-size: 13px;
+    color: #d4a373;
+}
+
+/* 2. Center Panel: Jigsaw Puzzle Board */
+.puzzle-board-panel {
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.puzzle-board-frame {
+    position: relative;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ornate Corner Brackets around Puzzle Board */
+.board-corner-bracket {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.board-corner-bracket.top-left {
+    top: 0;
+    left: 0;
+    border-top: 3px solid #d4a373;
+    border-left: 3px solid #d4a373;
+    border-top-left-radius: 8px;
+}
+
+.board-corner-bracket.top-right {
+    top: 0;
+    right: 0;
+    border-top: 3px solid #d4a373;
+    border-right: 3px solid #d4a373;
+    border-top-right-radius: 8px;
+}
+
+.board-corner-bracket.bottom-left {
+    bottom: 0;
+    left: 0;
+    border-bottom: 3px solid #d4a373;
+    border-left: 3px solid #d4a373;
+    border-bottom-left-radius: 8px;
+}
+
+.board-corner-bracket.bottom-right {
+    bottom: 0;
+    right: 0;
+    border-bottom: 3px solid #d4a373;
+    border-right: 3px solid #d4a373;
+    border-bottom-right-radius: 8px;
+}
+
+.puzzle-board-container {
+    background: #fefaf4;
+    border: 2px solid #d4a373;
+    border-radius: 12px;
+    box-shadow: inset 0 2px 10px rgba(197, 125, 86, 0.15), 0 8px 24px rgba(226, 149, 120, 0.2);
+    position: relative;
+    touch-action: none;
+    overflow: visible;
+}
+
+.puzzle-board-guide-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.puzzle-hint-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 10px;
+}
+
+.puzzle-board-container.ghost-hint-on {
+    filter: drop-shadow(0 0 20px rgba(212, 163, 115, 0.95)) drop-shadow(0 0 8px rgba(120, 22, 26, 0.4));
+}
+
+.puzzle-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 2;
+    background: transparent;
+    cursor: pointer;
+    border: none;
+    box-shadow: none;
+}
+
+.puzzle-slot-ghost {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    filter: drop-shadow(0 0 12px rgba(212, 163, 115, 0.95));
+    z-index: 1;
+}
+
+.board-lotus-accent {
+    margin-top: 14px;
+    font-size: 18px;
+    color: #e29578;
+}
+
+/* 3. Right Panel: Pieces Tray */
+.puzzle-tray-panel {
+    padding: 20px 16px;
+}
+
+.puzzle-tray-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    width: 100%;
+    min-height: 400px;
+    max-height: 480px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 12px 10px;
+    background: rgba(253, 247, 237, 0.75);
+    border: 1.5px dashed rgba(212, 163, 115, 0.5);
+    border-radius: 16px;
+    justify-items: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* Custom Smooth Golden Scrollbar */
+.puzzle-tray-container::-webkit-scrollbar {
+    width: 6px;
+}
+.puzzle-tray-container::-webkit-scrollbar-track {
+    background: rgba(212, 163, 115, 0.15);
+    border-radius: 4px;
+}
+.puzzle-tray-container::-webkit-scrollbar-thumb {
+    background: rgba(212, 163, 115, 0.6);
+    border-radius: 4px;
+}
+.puzzle-tray-container::-webkit-scrollbar-thumb:hover {
+    background: #78161a;
+}
+
+/* Active Global Drag Layer (Attached to Body to prevent any overflow/backdrop clipping) */
+#puzzle-drag-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 999999;
+}
+
+/* Draggable Interlocking Jigsaw Pieces */
+.puzzle-piece {
+    cursor: grab;
+    touch-action: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    -webkit-user-select: none;
+    z-index: 5;
+    box-sizing: border-box;
+}
+
+/* Pieces inside Tray: Neat, clearly visible, bounded preview cards */
+.puzzle-tray-container .puzzle-piece {
+    position: relative;
+    width: 100%;
+    max-width: 120px;
+    aspect-ratio: 1;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1.5px solid rgba(212, 163, 115, 0.6);
+    border-radius: 12px;
+    padding: 6px;
+    box-shadow: 0 2px 8px rgba(180, 110, 70, 0.08);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.puzzle-tray-container .puzzle-piece:hover {
+    background: #ffffff;
+    border-color: #78161a;
+    transform: translateY(-3px) scale(1.06);
+    box-shadow: 0 6px 16px rgba(120, 22, 26, 0.22);
+    z-index: 15;
+}
+
+.puzzle-tray-container .puzzle-piece canvas {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px rgba(50, 25, 10, 0.2));
+}
+
+/* Pieces while Dragging / Selected */
+.puzzle-piece.dragging,
+.puzzle-piece.selected-held {
+    cursor: grabbing !important;
+    opacity: 1 !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    transform: scale(1.05) !important;
+    filter: drop-shadow(0 14px 28px rgba(52, 30, 21, 0.45)) drop-shadow(0 0 20px rgba(255, 180, 120, 0.95)) !important;
+    transition: none !important;
+    z-index: 999999 !important;
+    pointer-events: none !important;
+    will-change: left, top, transform;
+}
+
+.puzzle-piece.dragging canvas,
+.puzzle-piece.selected-held canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: fill;
+}
+
+/* Pieces Placed on Board */
+.puzzle-piece.placed {
+    position: absolute;
+    z-index: 10;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    filter: drop-shadow(0 1px 2px rgba(45, 25, 15, 0.12));
+    transition: opacity 0.6s ease;
+}
+
+.puzzle-piece.placed canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: fill;
+}
+
+.puzzle-piece.correct {
+    filter: drop-shadow(0 0 4px rgba(212, 163, 115, 0.5));
+}
+
+/* Shake Animation when User attempts to drop a piece in a wrong slot */
+@keyframes shakeWrongPiece {
+    0%, 100% { transform: translate(0, 0) scale(1.04); }
+    20%, 60% { transform: translate(-8px, 0) scale(1.04); }
+    40%, 80% { transform: translate(8px, 0) scale(1.04); }
+}
+
+.puzzle-piece.shake-wrong {
+    animation: shakeWrongPiece 0.35s ease !important;
+    filter: drop-shadow(0 0 14px rgba(230, 50, 50, 0.85)) !important;
+}
+
+/* Master Seamless Complete Reveal Canvas (Hides all seams on completion into one flawless photo) */
+.puzzle-board-complete-reveal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 35px rgba(255, 215, 0, 0.7);
+}
+
+.puzzle-board-container.puzzle-board-completed .puzzle-board-complete-reveal {
+    opacity: 1;
+}
+
+.puzzle-board-container.puzzle-board-completed .puzzle-piece {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.puzzle-board-container.puzzle-board-completed .puzzle-board-guide-canvas {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+/* ==========================================================================
+   Responsive adjustments
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .puzzle-arena-layout {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+    .puzzle-reference-panel {
+        width: 100%;
+        max-width: 420px;
+        order: 1;
+    }
+    .puzzle-board-panel {
+        width: 100%;
+        order: 2;
+    }
+    .puzzle-tray-panel {
+        width: 100%;
+        max-width: 480px;
+        order: 3;
+    }
+    .puzzle-tray-container {
+        grid-template-columns: repeat(3, 1fr);
+        max-height: 240px;
+    }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "shree-vinayaka-chavati-mahostav",
+  "version": "1.0.0",
+  "description": "Shree Vinayaka Chavati Mahostav - 500 Divine Murtis Web Game",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "keywords": ["ganesh", "chaturthi", "puzzle", "coloring", "visarjan", "game"],
+  "author": "Bhakt",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

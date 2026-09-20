@@ -1,0 +1,9 @@
+services:
+  - type: static
+    name: shree-vinayaka-chavati-mahostav
+    plan: free
+    publishPath: .
+    routes:
+      - type: rewrite
+        source: /
+        destination: /landing.html
