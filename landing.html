@@ -1619,6 +1619,286 @@ footer {
   transform: scale(0.98);
 }
 
+/* ==========================================================================
+   COMPREHENSIVE MOBILE RESPONSIVE FIXES
+   ========================================================================== */
+
+/* --- MOBILE NAV (<=600px) --- */
+@media (max-width: 600px) {
+  .site-nav {
+    top: 8px;
+    width: calc(100% - 20px);
+    padding: 10px 16px;
+    border-radius: 40px;
+  }
+
+  .nav-om { font-size: 20px; }
+
+  .nav-title-group h1 { font-size: 12px; }
+  .nav-title-group span { display: none; }
+  .nav-links { display: none; }
+
+  .btn-audio-pill { padding: 6px 10px; font-size: 12px; gap: 4px; }
+  .btn-audio-pill span:last-child { display: none; } /* hide "Temple Bell" text */
+
+  .btn-nav-play { padding: 7px 14px; font-size: 12px; gap: 5px; }
+}
+
+/* --- HERO SECTION MOBILE --- */
+@media (max-width: 1024px) {
+  .hero-section {
+    padding: 110px 20px 60px;
+    min-height: auto;
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 32px;
+  }
+
+  .hero-description { margin-left: auto; margin-right: auto; }
+  .hero-cta-group { justify-content: center; }
+}
+
+@media (max-width: 600px) {
+  .hero-section { padding: 90px 16px 50px; }
+
+  .hero-badge-wrap {
+    padding: 6px 16px;
+    font-size: 11px;
+    margin-bottom: 16px;
+  }
+
+  .hero-title {
+    font-size: clamp(28px, 8vw, 44px) !important;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .hero-mantra { font-size: 14px; margin-bottom: 14px; }
+
+  .hero-description {
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .btn-primary-magnetic {
+    padding: 14px 28px;
+    font-size: 15px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-secondary-outlined {
+    padding: 12px 24px;
+    font-size: 14px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+    margin-bottom: 32px;
+  }
+
+  .hero-ganesh-img {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  .hero-diya-left, .hero-diya-right { width: 60px; }
+}
+
+/* --- STATS STRIP MOBILE --- */
+@media (max-width: 600px) {
+  .stats-strip-section { padding: 0 14px 50px; }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px;
+    padding: 20px 16px;
+    border-radius: 20px;
+  }
+
+  .stats-grid > div:last-child {
+    grid-column: span 2;
+  }
+
+  .stat-number { font-size: clamp(28px, 8vw, 40px); }
+  .stat-title { font-size: 13px; }
+  .stat-desc { font-size: 10px; }
+}
+
+/* --- GAMES SECTION MOBILE --- */
+@media (max-width: 992px) {
+  .games-cards-grid {
+    grid-template-columns: 1fr !important;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .section-wrapper { padding: 60px 16px; }
+
+  .section-header { margin-bottom: 36px; }
+
+  .section-title { font-size: clamp(26px, 7vw, 36px); }
+
+  .section-subtitle { font-size: 14px; }
+
+  .cinematic-game-card { border-radius: 20px; }
+
+  .card-body { padding: 22px 18px 20px; }
+
+  .card-title { font-size: 20px; }
+
+  .card-telugu { font-size: 13px; margin-bottom: 10px; }
+
+  .card-desc { font-size: 13px; margin-bottom: 18px; }
+
+  .btn-card-launch { font-size: 14px; padding: 12px; }
+
+  .btn-card-roadmap { font-size: 13px; padding: 10px 14px; }
+}
+
+/* --- CAROUSEL MOBILE --- */
+@media (max-width: 600px) {
+  .carousel-track-container { gap: 14px; padding: 24px 16px; }
+
+  .carousel-card { flex: 0 0 180px; border-radius: 16px; }
+
+  .carousel-card-title { font-size: 13px; }
+  .carousel-card-sub { font-size: 11px; }
+
+  .carousel-controls { gap: 16px; margin-top: 20px; }
+
+  .carousel-btn { width: 40px; height: 40px; font-size: 16px; }
+}
+
+/* --- TIMELINE SECTION MOBILE --- */
+@media (max-width: 768px) {
+  .timeline-track-line { display: none; }
+
+  .timeline-steps-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+  }
+
+  .timeline-step-card { padding: 28px 20px; border-radius: 18px; }
+
+  .step-number-badge { width: 50px; height: 50px; font-size: 20px; }
+
+  .step-icon { font-size: 28px; margin-bottom: 10px; }
+
+  .step-title { font-size: 17px; }
+
+  .step-desc { font-size: 13px; }
+}
+
+/* --- ENVIRONMENTS SECTION MOBILE --- */
+@media (max-width: 600px) {
+  .env-tabs { gap: 8px; margin-bottom: 24px; }
+
+  .env-tab-btn { padding: 8px 14px; font-size: 12px; border-radius: 30px; }
+
+  .env-display-stage { border-radius: 20px; }
+
+  .env-overlay-info {
+    padding: 20px 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .env-info-left h3 { font-size: clamp(18px, 5vw, 26px); }
+  .env-info-left p { font-size: 13px; max-width: 100%; }
+
+  .btn-nav-play { font-size: 13px; padding: 10px 18px; }
+}
+
+/* --- FEATURES GRID MOBILE --- */
+@media (max-width: 600px) {
+  .features-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+  }
+
+  .feature-box { padding: 24px 18px; border-radius: 16px; }
+
+  .feature-icon-wrap { font-size: 32px; margin-bottom: 12px; }
+
+  .feature-title { font-size: 16px; }
+
+  .feature-desc { font-size: 13px; }
+}
+
+/* --- FINAL CTA SECTION MOBILE --- */
+@media (max-width: 600px) {
+  .final-cta-section { padding: 80px 20px 70px; }
+
+  .final-heading { font-size: clamp(30px, 9vw, 50px); margin-bottom: 14px; }
+
+  .final-subtext { font-size: 15px; margin-bottom: 30px; }
+
+  .final-cta-content .btn-primary-magnetic {
+    width: 100%;
+    max-width: 340px;
+    font-size: 16px;
+    padding: 16px 28px;
+  }
+}
+
+/* --- FOOTER MOBILE --- */
+@media (max-width: 600px) {
+  footer { padding: 36px 20px; }
+  .footer-om { font-size: 30px; }
+  .footer-text { font-size: 13px; }
+}
+
+/* --- PLAYER MODAL MOBILE --- */
+@media (max-width: 480px) {
+  .player-modal-card {
+    padding: 30px 20px 26px;
+    border-radius: 24px;
+    max-width: 100%;
+    margin: 0 10px;
+  }
+
+  .modal-main-title { font-size: 28px; }
+
+  .modal-subtitle { font-size: 14px; }
+
+  .form-input, .form-select {
+    font-size: 15px;
+    padding: 12px 14px;
+  }
+
+  .btn-modal-save { font-size: 16px; padding: 14px; }
+}
+
+/* --- PREVENT HORIZONTAL OVERFLOW ON ALL SCREENS --- */
+*, *::before, *::after {
+  max-width: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Fix nav text wrapping on small screens */
+@media (max-width: 400px) {
+  .nav-title-group h1 { font-size: 10px; letter-spacing: 0; }
+  .nav-actions { gap: 6px; }
+  .btn-audio-pill { display: none; } /* hide bell on very small screens */
+}
+
 </style>
 </head>
 <body>
