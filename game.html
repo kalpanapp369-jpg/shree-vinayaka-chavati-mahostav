@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ganesh Chaturthi Mahotsav - 500 Divine Murtis Web Game</title>
+    <meta name="description" content="Experience 500 Ganesha Puzzle Levels, 500 Murti Sringar Dress-Up Idols, and Sacred River Nimarjanam Immersion with authentic festival audio & visuals.">
+    
+    <!-- Design & Game Stylesheets (with cache-busting version) -->
+    <link rel="stylesheet" href="css/style.css?v=5.7">
+    <link rel="stylesheet" href="css/puzzle.css?v=5.7">
+    <link rel="stylesheet" href="css/dressup.css?v=5.7">
+    <link rel="stylesheet" href="css/nimarjanam.css?v=5.7">
+</head>
+<body>
+
+    <!-- Ambient Floating Particles Layer -->
+    <div id="ambient-particles-layer"></div>
+    
+    <!-- Active Drag & Drop Floating Layer (Never clipped by panels) -->
+    <div id="puzzle-drag-layer"></div>
+    
+    <!-- Celebration Flower Confetti Overlay -->
+    <div id="festival-effects-overlay"></div>
+
+    <!-- Master Realistic Festive Background & Atmospheric Layer -->
+    <div class="festive-decorations-container" aria-hidden="true">
+        <!-- Left Side Temple Gopuram Watermark -->
+        <div class="temple-watermark temple-watermark-left">
+            <img src="assets/images/decor_temple_gopuram_watermark.png" alt="" class="watermark-img">
+        </div>
+        
+        <!-- Right Side Temple Gopuram Watermark -->
+        <div class="temple-watermark temple-watermark-right">
+            <img src="assets/images/decor_temple_gopuram_watermark.png" alt="" class="watermark-img">
+        </div>
+        
+        <!-- Bottom Center Golden Mandala / Rangoli Watermark -->
+        <div class="mandala-watermark-center">
+            <img src="assets/images/decor_mandala_watermark.png" alt="" class="mandala-img">
+        </div>
+
+        <!-- Top Left Festive Garland & Brass Hanging Bell -->
+        <div class="decor-corner top-left-garland">
+            <img src="assets/images/decor_garland_bell_left.png" alt="Festive Mango Leaves & Bell" class="festive-corner-img garland-bell-img">
+        </div>
+
+        <!-- Top Right Festive Garland & Brass Hanging Bell -->
+        <div class="decor-corner top-right-garland">
+            <img src="assets/images/decor_garland_bell_right.png" alt="Festive Mango Leaves & Bell" class="festive-corner-img garland-bell-img">
+        </div>
+
+        <!-- Bottom Left Glowing Brass Diya & Pink Lotus -->
+        <div class="decor-corner bottom-left-diya">
+            <img src="assets/images/decor_diya_lotus_left.png" alt="Sacred Diya & Lotus" class="festive-corner-img diya-lotus-img">
+        </div>
+
+        <!-- Bottom Right Glowing Brass Diya & Pink Lotus -->
+        <div class="decor-corner bottom-right-diya">
+            <img src="assets/images/decor_diya_lotus_right.png" alt="Sacred Diya & Lotus" class="festive-corner-img diya-lotus-img">
+        </div>
+    </div>
+
+    <!-- Global Top Navigation Bar -->
+    <header class="global-header">
+        <div class="header-temple-watermark">
+            <img src="assets/images/decor_temple_gopuram_watermark.png" alt="" class="header-watermark-img">
+        </div>
+        
+        <div class="header-brand nav-home-btn" title="Return to Main Menu">
+            <div class="header-om-icon">ॐ</div>
+            <div class="header-title-group">
+                <h1>Shree Vinayaka Chavithi Mahotsav</h1>
+                <p>500 Divine Murtis • Puzzle Assembly • Coloring Studio • Sacred Visarjan</p>
+            </div>
+        </div>
+
+        <div class="header-controls">
+            <a href="landing.html" class="btn-icon-text" title="Landing Page / About Festival" style="text-decoration:none;display:inline-flex;align-items:center;">
+                <span class="btn-icon">🪔</span> Home
+            </a>
+            <button id="btn-open-level-selector" class="btn-icon-text" title="Browse all 500 Levels Road Map" onclick="window.mainApp.openLevelSelectorModal('puzzle')">
+                <span class="btn-icon">🗺️</span> 500 Road Map
+            </button>
+            <button id="btn-open-stats" class="btn-icon-text" title="View Festival Achievements" onclick="window.mainApp.openStatsModal()">
+                <span class="btn-icon">🏆</span> Achievements
+            </button>
+            <button id="sacred-bell-trigger" class="btn-icon-text" title="Ring Sacred Temple Bell" onclick="window.sacredAudio.playTempleBell(880, 2.5); window.sacredAudio.playShankha(2.0)">
+                <span class="btn-icon">🔔</span> Bell
+            </button>
+            <button id="audio-music-toggle" class="btn-icon-text" title="Toggle Sacred Ambient Drone">
+                <span class="btn-icon">🪔</span> Music
+            </button>
+            <button id="audio-mute-toggle" class="btn-icon-text" title="Mute/Unmute Audio">
+                <span class="btn-icon">🔊</span> Sound
+            </button>
+        </div>
+
+        <!-- Center Golden Lotus Accent on Header Underline -->
+        <div class="header-divider-lotus">🪷</div>
+    </header>
+
+    <!-- Master Screen Routing Container -->
+    <main class="app-screens-container">
+
+        <!-- =================================================================
+             SCREEN 1: START SCREEN / MAIN MENU
+             ================================================================= -->
+        <section id="screen-menu" class="game-screen active-screen">
+            <div class="menu-hero-section">
+                <div class="divine-kalash-badge">
+                    <span>🪔</span> Anant Chaturdashi Divine Mahotsav <span>🪔</span>
+                </div>
+                <h1 class="menu-hero-title">॥ ॐ गं गणपतये नमः ॥</h1>
+                <p class="menu-hero-subtitle">
+                    Shree Vinayaka Chavithi Celebration • 500 Sacred Murtis Puzzles • 24K Gold & Natural Colors Painting • Holy Ganga-Godavari Visarjan.
+                </p>
+                <div id="player-welcome-badge" style="display:none;margin: 14px auto 0;padding: 6px 22px;background: rgba(255, 255, 255, 0.95);border: 1.5px solid #c57d56;border-radius: 30px;color: #341e15;font-weight: 700;font-size: 14px;box-shadow: 0 4px 15px rgba(197, 125, 86, 0.2);align-items: center;gap: 8px;">
+                    <span>👤</span> Player: <span id="player-welcome-name" style="color: #e65100; font-weight: 800;"></span>
+                </div>
+            </div>
+
+            <!-- Global Festival Summary Stats -->
+            <div class="festival-summary-bar">
+                <div class="fsb-stat-item">
+                    <div class="stat-label">Overall Progress</div>
+                    <div id="home-overall-progress" class="stat-value">0% Festival Completed</div>
+                </div>
+                <div class="fsb-stat-item">
+                    <div class="stat-label">Game 1: Puzzles</div>
+                    <div id="home-stat-puzzle" class="stat-value">0 / 500 Solved</div>
+                </div>
+                <div class="fsb-stat-item">
+                    <div class="stat-label">Game 2: Coloring</div>
+                    <div id="home-stat-dressup" class="stat-value">0 / 500 Painted</div>
+                </div>
+                <div class="fsb-stat-item">
+                    <div class="stat-label">Game 3: Visarjan</div>
+                    <div id="home-stat-nimarjanam" class="stat-value">0 / 500 Immersed</div>
+                </div>
+            </div>
+
+            <!-- 3 Game Modes Grid with Rich Visual Previews -->
+            <div class="game-modes-grid">
+                
+                <!-- Card 1: Puzzle Assembly Game -->
+                <div class="game-mode-card">
+                    <div class="gmc-badge">500 Levels</div>
+                    <div class="gmc-banner-img-wrap">
+                        <img src="assets/images/lalbaug.jpg" alt="Puzzle 500 Levels" class="gmc-banner-img">
+                        <div class="gmc-icon-pill">🧩 Game 1</div>
+                    </div>
+                    <h2 class="gmc-title">Puzzle Assembly</h2>
+                    <p class="gmc-desc">
+                        500 divine Lord Ganesha jigsaw puzzles. Assemble the sacred pieces guided by reference darshan, collect stars and earn high scores!
+                    </p>
+                    <div class="gmc-footer">
+                        <span class="gmc-progress-tag" style="cursor:pointer;" title="View 500 Levels Road Map" onclick="window.mainApp.openLevelSelectorModal('puzzle')">🗺️ Levels 1 - 500</span>
+                        <div class="gmc-btn-pair">
+                            <button id="btn-play-puzzle" class="btn-primary-divine" onclick="window.mainApp.switchMode('puzzle')">Play Puzzle →</button>
+                            <button class="btn-secondary-divine btn-open-map" onclick="window.mainApp.openLevelSelectorModal('puzzle')">🗺️ Road Map</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Murti Coloring & Painting -->
+                <div class="game-mode-card">
+                    <div class="gmc-badge">500 Divine Murtis</div>
+                    <div class="gmc-banner-img-wrap">
+                        <img src="assets/images/coloring_dagdusheth.jpg" alt="Murti Coloring" class="gmc-banner-img">
+                        <div class="gmc-icon-pill">🎨 Game 2</div>
+                    </div>
+                    <h2 class="gmc-title">Murti Coloring Studio</h2>
+                    <p class="gmc-desc">
+                        Paint 500 unadorned sacred Ganesha idols with sindoor, turmeric, 24K gold, navagraha colors, and divine brushes to your heart's desire.
+                    </p>
+                    <div class="gmc-footer">
+                        <span class="gmc-progress-tag" style="cursor:pointer;" title="View 500 Levels Road Map" onclick="window.mainApp.openLevelSelectorModal('dressup')">🗺️ Murtis 1 - 500</span>
+                        <div class="gmc-btn-pair">
+                            <button id="btn-play-dressup" class="btn-primary-divine" onclick="window.mainApp.switchMode('dressup')">Start Coloring →</button>
+                            <button class="btn-secondary-divine btn-open-map" onclick="window.mainApp.openLevelSelectorModal('dressup')">🗺️ Road Map</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Sacred Nimarjanam / Visarjan -->
+                <div class="game-mode-card">
+                    <div class="gmc-badge">500 Immersions</div>
+                    <div class="gmc-banner-img-wrap">
+                        <img src="assets/images/nimarjanam_bg.jpg" alt="Ganesh Visarjan" class="gmc-banner-img">
+                        <div class="gmc-icon-pill">🌊 Game 3</div>
+                    </div>
+                    <h2 class="gmc-title">Shree Ganesh Visarjan</h2>
+                    <p class="gmc-desc">
+                        Pick up sacred 3D idols on the ghat with a heavy crane, lower them gently into the holy waters, and celebrate with dhol-tasha beats.
+                    </p>
+                    <div class="gmc-footer">
+                        <span class="gmc-progress-tag" style="cursor:pointer;" title="View 500 Levels Road Map" onclick="window.mainApp.openLevelSelectorModal('nimarjanam')">🗺️ Ghat 1 - 500</span>
+                        <div class="gmc-btn-pair">
+                            <button id="btn-play-nimarjanam" class="btn-primary-divine" onclick="window.mainApp.switchMode('nimarjanam')">Start Visarjan →</button>
+                            <button class="btn-secondary-divine btn-open-map" onclick="window.mainApp.openLevelSelectorModal('nimarjanam')">🗺️ Road Map</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             SCREEN 2: GAME 1 - PUZZLE ASSEMBLY (Exact User Match)
+             ================================================================= -->
+        <section id="screen-puzzle" class="game-screen">
+            <div class="puzzle-game-wrapper">
+                
+                <!-- Ornate Control Header Card -->
+                <div class="game-control-header">
+                    <div class="card-corner-bracket top-left"></div>
+                    <div class="card-corner-bracket top-right"></div>
+                    <div class="card-corner-bracket bottom-left"></div>
+                    <div class="card-corner-bracket bottom-right"></div>
+
+                    <div class="gch-lotus-top">🪷</div>
+
+                    <div class="gch-top-row">
+                        <div class="gch-level-info">
+                            <h2 id="puzzle-level-title" class="pzh-title">LEVEL 6/500: ARTISAN ECO SHADU TERRACOTTA MURTI</h2>
+                            <p id="puzzle-level-subtitle" class="pzh-subtitle">Vigraham: Artisan Eco Shadu Terracotta Murti • Category: Eco Artisan • Theme: Banyan Tree Grove with Lotus Pond</p>
+                        </div>
+
+                        <div class="gch-stats-group">
+                            <div class="stat-pill"><span class="stat-icon">⏱</span> <span id="puzzle-timer-display">00:46</span></div>
+                            <div class="stat-pill moves-pill"><span class="stat-icon foot-icon">👣</span> <span id="puzzle-moves-count">1 Moves</span></div>
+                        </div>
+                    </div>
+
+                    <div class="gch-bottom-row">
+                        <div class="grid-size-selector" title="Change grid size (from 2x2 to 12x12)">
+                            <button class="grid-size-btn" data-size="2" title="2x2 (4 Pieces - Easy)">2x2</button>
+                            <button class="grid-size-btn active" data-size="3" title="3x3 (9 Pieces - Medium)">3x3</button>
+                            <button class="grid-size-btn" data-size="4" title="4x4 (16 Pieces - Hard)">4x4</button>
+                            <button class="grid-size-btn" data-size="5" title="5x5 (25 Pieces - Expert)">5x5</button>
+                            <button class="grid-size-btn" data-size="6" title="6x6 (36 Pieces - Master)">6x6</button>
+                            <button class="grid-size-btn" data-size="7" title="7x7 (49 Pieces - Artisan)">7x7</button>
+                            <button class="grid-size-btn" data-size="8" title="8x8 (64 Pieces - Architect)">8x8</button>
+                            <button class="grid-size-btn" data-size="9" title="9x9 (81 Pieces - Scholar)">9x9</button>
+                            <button class="grid-size-btn" data-size="10" title="10x10 (100 Pieces - Champion)">10x10</button>
+                            <button class="grid-size-btn" data-size="11" title="11x11 (121 Pieces - Grand Master)">11x11</button>
+                            <button class="grid-size-btn" data-size="12" title="12x12 (144 Pieces - Supreme Master)">12x12</button>
+                        </div>
+                        <button id="puzzle-hint-btn" class="pzh-action-btn" title="Toggle Hint Overlay">
+                            <span class="btn-emoji">💡</span> Hint
+                        </button>
+                        <button id="puzzle-restart-btn" class="pzh-action-btn" title="Shuffle & Restart">
+                            <span class="btn-emoji">🔄</span> Restart
+                        </button>
+                        <button class="pzh-action-btn" title="Open 500 Levels Road Map" onclick="window.mainApp.openLevelSelectorModal('puzzle')">
+                            <span class="btn-emoji">🗺️</span> Road Map
+                        </button>
+                        <button class="pzh-action-btn nav-home-btn" title="Back to Main Menu">
+                            <span class="btn-emoji">🏠</span> Menu
+                        </button>
+                    </div>
+
+                    <div class="gch-lotus-bottom">🪷</div>
+                </div>
+
+                <!-- Main Puzzle Arena (3 Columns) -->
+                <div class="puzzle-arena-layout">
+                    
+                    <!-- 1. Left Panel: Reference Darshan -->
+                    <div class="puzzle-reference-panel">
+                        <div class="card-corner-bracket top-left"></div>
+                        <div class="card-corner-bracket top-right"></div>
+                        <div class="card-corner-bracket bottom-left"></div>
+                        <div class="card-corner-bracket bottom-right"></div>
+
+                        <div class="panel-header-badge">
+                            <span class="lotus-motif">🪷</span>
+                            <h3 class="panel-title-telugu">Reference Darshan</h3>
+                            <span class="lotus-motif">🪷</span>
+                        </div>
+                        <div class="panel-title-sub">(Model Image)</div>
+                        
+                        <div class="ref-canvas-wrapper">
+                            <canvas id="puzzle-ref-canvas" width="260" height="260"></canvas>
+                        </div>
+
+                        <div class="puzzle-darshan-quote-box">
+                            <p id="puzzle-darshan-quote" class="darshan-quote-text">"Lord Ganesha illuminates the path of victory, peace, and eternal happiness."</p>
+                            <div class="darshan-quote-divider">
+                                <span class="divider-line"></span>
+                                <span class="divider-lotus">🪷</span>
+                                <span class="divider-line"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Center Panel: Jigsaw Puzzle Board -->
+                    <div class="puzzle-board-panel">
+                        <div class="card-corner-bracket top-left"></div>
+                        <div class="card-corner-bracket top-right"></div>
+                        <div class="card-corner-bracket bottom-left"></div>
+                        <div class="card-corner-bracket bottom-right"></div>
+
+                        <div class="puzzle-board-frame">
+                            <div class="board-corner-bracket top-left"></div>
+                            <div class="board-corner-bracket top-right"></div>
+                            <div class="board-corner-bracket bottom-left"></div>
+                            <div class="board-corner-bracket bottom-right"></div>
+                            <div id="puzzle-board" class="puzzle-board-container"></div>
+                        </div>
+                        <div class="board-lotus-accent">🪷</div>
+                    </div>
+
+                    <!-- 3. Right Panel: Pieces Tray -->
+                    <div class="puzzle-tray-panel">
+                        <div class="card-corner-bracket top-left"></div>
+                        <div class="card-corner-bracket top-right"></div>
+                        <div class="card-corner-bracket bottom-left"></div>
+                        <div class="card-corner-bracket bottom-right"></div>
+
+                        <div class="panel-header-badge">
+                            <span class="lotus-motif">🪷</span>
+                            <h3 class="panel-title-telugu">Pieces Tray</h3>
+                            <span class="lotus-motif">🪷</span>
+                        </div>
+                        <div class="panel-title-sub">(Jigsaw Pieces)</div>
+                        
+                        <div id="puzzle-tray" class="puzzle-tray-container"></div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             SCREEN 3: GAME 2 - MURTI COLORING & PAINTING
+             ================================================================= -->
+        <section id="screen-dressup" class="game-screen">
+            <div class="dressup-game-wrapper">
+                
+                <!-- Control Header -->
+                <div class="game-control-header">
+                    <div class="gch-level-info">
+                        <h2 id="dressup-level-title">Murti Coloring 1/500: Shree Siddhivinayak</h2>
+                        <p id="dressup-level-subtitle">Tap to fill color • Paint with freehand divine brush</p>
+                    </div>
+
+                    <div class="gch-actions-group">
+                        <button id="coloring-undo-btn" class="btn-icon-text" title="Undo last action">
+                            ↩️ Undo
+                        </button>
+                        <button id="coloring-redo-btn" class="btn-icon-text" title="Redo action">
+                            ↪️ Redo
+                        </button>
+                        <button id="coloring-magic-btn" class="btn-icon-text" title="Auto-fill with Divine Temple Colors">
+                            ✨ Magic Colors
+                        </button>
+                        <button id="coloring-clear-btn" class="btn-icon-text" title="Clear all colors">
+                            🧹 Clear
+                        </button>
+                        <button id="coloring-aarti-btn" class="btn-icon-text" title="Perform Aarti Ceremony">
+                            🪔 Aarti
+                        </button>
+                        <button id="coloring-download-btn" class="btn-icon-text" title="Download Painted Murti Artwork">
+                            📸 Save Photo
+                        </button>
+                        <button id="coloring-finish-btn" class="btn-primary-divine">
+                            ✨ Finish Coloring →
+                        </button>
+                        <button class="btn-icon-text" title="Open 500 Levels Road Map" onclick="window.mainApp.openLevelSelectorModal('dressup')">
+                            🗺️ Road Map
+                        </button>
+                        <button class="btn-icon-text nav-home-btn" title="Back to Main Menu">
+                            🏠 Menu
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Main Coloring Studio Layout -->
+                <div class="dressup-studio-layout">
+                    
+                    <!-- Murti Interactive Coloring Canvas Stage -->
+                    <div class="dressup-stage-panel">
+                        <div class="canvas-viewport coloring-viewport">
+                            <canvas id="coloring-canvas" width="600" height="600"></canvas>
+                            <!-- Floating Aarti Diya Flame Overlay -->
+                            <div id="aarti-flame-overlay">
+                                <div class="aarti-diya-graphic"></div>
+                            </div>
+                        </div>
+
+                        <!-- Coloring Tools Toolbar (Bucket, Brush, Eraser, Sizes) -->
+                        <div class="coloring-tools-toolbar">
+                            <div class="tool-buttons-group">
+                                <button id="tool-bucket-btn" class="btn-tool active" title="Tap to Flood Fill Area">
+                                    🪣 Fill Color
+                                </button>
+                                <button id="tool-brush-btn" class="btn-tool" title="Freehand Paint Brush">
+                                    🖌️ Brush
+                                </button>
+                                <button id="tool-eraser-btn" class="btn-tool" title="Eraser (Paint White)">
+                                    🧹 Eraser
+                                </button>
+                            </div>
+
+                            <div class="brush-sizes-group">
+                                <span class="brush-size-label">Size:</span>
+                                <button class="brush-size-btn" data-size="4" title="Fine Brush">S</button>
+                                <button class="brush-size-btn active" data-size="10" title="Medium Brush">M</button>
+                                <button class="brush-size-btn" data-size="22" title="Broad Brush">L</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wardrobe / Color Palettes Drawer -->
+                    <div class="wardrobe-catalog-panel coloring-catalog-panel">
+                        <div id="wardrobe-items-grid" class="wardrobe-items-grid"></div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             SCREEN 4: GAME 3 - GANESH NIMAJJANAM IMMERSION (naveen.immersion Exact Replica)
+             ================================================================= -->
+        <section id="screen-nimarjanam" class="game-screen">
+            <div class="nimarjanam-game-wrapper">
+                
+                <!-- Ghat Viewport & Realistic Crane Stage -->
+                <div id="nimarjanam-viewport" class="nimarjanam-ghat-viewport">
+
+                    <!-- CSS Animated Living Water Background (Video-Like Real Water & Sky) -->
+                    <div id="nimarjanam-living-bg" class="nimarjanam-living-bg" aria-hidden="true">
+                        <!-- Sky gradient layer -->
+                        <div class="nlb-sky"></div>
+                        <!-- Distant mountain / treeline silhouette -->
+                        <div class="nlb-treeline"></div>
+                        <!-- Water body with horizontal flowing current -->
+                        <div class="nlb-water-body">
+                            <!-- Multiple wave layers for depth -->
+                            <div class="nlb-wave nlb-wave-1"></div>
+                            <div class="nlb-wave nlb-wave-2"></div>
+                            <div class="nlb-wave nlb-wave-3"></div>
+                            <!-- Light shimmer on water surface -->
+                            <div class="nlb-shimmer"></div>
+                            <!-- Caustic light underwater patterns -->
+                            <div class="nlb-caustic"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Master Game Canvas (Background, Road, Idols Queue, Crane, Water, Waves, Particles) -->
+                    <canvas id="nimarjanam-water-canvas"></canvas>
+
+                    <!-- Top Arcade HUD Overlay (Exact match to screenshot) -->
+                    <div class="arcade-hud-overlay">
+                        
+                        <!-- Top-Left: Circular Crane Grip Size Adjusters (+ / -) -->
+                        <div class="hud-zoom-group">
+                            <button id="btn-zoom-in" class="hud-circle-btn zoom-btn" title="Expand Crane Claw (+) (Key: E or +)">
+                                <span>+</span>
+                            </button>
+                            <button id="btn-zoom-out" class="hud-circle-btn zoom-btn" title="Narrow Crane Claw (−) (Key: Q or −)">
+                                <span>−</span>
+                            </button>
+                            <div class="hud-claw-badge" title="Current Crane Claw Width">
+                                <span id="crane-grip-val">54px</span>
+                            </div>
+                        </div>
+
+                        <!-- Top-Center: Level, Idols Immersed, 3D Glossy "score" & Laddus -->
+                        <div class="hud-score-container">
+                            <div class="hud-level-badge" title="Current Level">
+                                <span class="hlb-label">LEVEL</span>
+                                <span id="nimarjanam-level-val" class="hlb-val">1</span>
+                            </div>
+                            <div class="hud-idols-badge" title="Idols Immersion Progress">
+                                <span class="hib-icon">🛕</span>
+                                <span id="nimarjanam-idols-val" class="hib-val">0 / 1</span>
+                            </div>
+                            <div class="hud-score-badge">
+                                <span class="score-3d-text">score</span>
+                                <span id="nimarjanam-score-val" class="score-val-text">0</span>
+                            </div>
+                            <div class="hud-laddu-pill" title="Bonus Laddus Collected">
+                                <span>🟡</span> <span id="nimarjanam-laddu-val">0</span>
+                            </div>
+                        </div>
+
+                        <!-- Top-Right: Countdown Timer & Quick Menu -->
+                        <div class="hud-timer-container">
+                            <div class="hud-timer-badge" id="hud-timer-badge" title="Remaining Time">
+                                <span class="timer-icon">⏱️</span>
+                                <div id="nimarjanam-timer-val" class="timer-digits-3d">01:05</div>
+                                <span id="nimarjanam-timer-sec" class="timer-sec-pill">65s</span>
+                            </div>
+                            <div class="hud-mini-actions">
+                                <button id="crane-auto-btn" class="hud-mini-btn" title="Auto Immersion Ceremony">🎬 Auto</button>
+                                <button class="hud-mini-btn" title="Open 500 Levels Road Map" onclick="window.mainApp.openLevelSelectorModal('nimarjanam')">🗺️ Map</button>
+                                <button class="hud-mini-btn nav-home-btn" title="Back to Main Menu">🏠 Menu</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- On-Screen Big Orange Triangle Arrow Controls (Exact Screenshot Placement) -->
+                    
+                    <!-- Top-Right: Hoist Up & Down Controls -->
+                    <div class="arcade-arrow-controls top-right-hoist">
+                        <button id="btn-crane-up" class="orange-triangle-btn triangle-up" title="Lift Hoist Up (W / Up Arrow)">
+                            <div class="triangle-shape shape-up"></div>
+                        </button>
+                        <button id="btn-crane-down" class="orange-triangle-btn triangle-down" title="Lower Clamps Down (S / Down Arrow)">
+                            <div class="triangle-shape shape-down"></div>
+                        </button>
+                    </div>
+
+                    <!-- Bottom-Left: Trolley Left & Right Controls -->
+                    <div class="arcade-arrow-controls bottom-left-trolley">
+                        <button id="btn-crane-left" class="orange-triangle-btn triangle-left" title="Move Trolley Left (A / Left Arrow)">
+                            <div class="triangle-shape shape-left"></div>
+                        </button>
+                        <button id="btn-crane-right" class="orange-triangle-btn triangle-right" title="Move Trolley Right (D / Right Arrow)">
+                            <div class="triangle-shape shape-right"></div>
+                        </button>
+                    </div>
+
+                    <!-- Floating Score Notifications Layer -->
+                    <div id="nimarjanam-floating-scores" class="floating-scores-container"></div>
+
+                    <!-- Crane Status & Context-Aware Quick Action Pill -->
+                    <div id="crane-operator-cue" class="arcade-status-pill">
+                        <span id="crane-instruction-text">🎮 Use ◀ ▶ to move crane, or click the action button!</span>
+                        <button id="crane-context-action-btn" class="btn-context-action" title="Perform Current Action">
+                            🪝 Pick Up Idol (+25 Pts)
+                        </button>
+                    </div>
+
+                    <!-- Intermediate Idol Immersion Notification Toast -->
+                    <div id="nimarjanam-chant-banner" class="nimarjanam-chant-banner">
+                        <h3 id="nimarjanam-chant-text" class="chant-slogan">Ganapati Bappa Morya, Pudhchya Varshi Lavkar Ya!</h3>
+                        <p id="nimarjanam-chant-blessing" class="chant-blessing-text">
+                            ✨ Sacred immersion complete! Preparing next divine idol...
+                        </p>
+                    </div>
+
+
+
+                </div>
+
+                <!-- Bottom Helper Bar: Keyboard shortcut info & Environment Themes -->
+                <div class="arcade-bottom-info-bar">
+                    <div class="abi-shortcuts">
+                        <span>⌨️ Controls: <strong>A/◀</strong> (Left) | <strong>D/▶</strong> (Right) | <strong>W/▲</strong> (Up) | <strong>S/▼</strong> (Down) | <strong>+ / − (Q / E)</strong>: Crane Claw Size Adjust</span>
+                    </div>
+                    <div class="abi-env-selector">
+                        <span>Scenic Ghat: </span>
+                        <select id="nimarjanam-env-select" class="env-dropdown-sm">
+                            <option value="lake">🌊 Mystic Lake Waterfall</option>
+                            <option value="river">🏞️ Flowing Holy River</option>
+                            <option value="night">🌕 Full Moon Night</option>
+                            <option value="greenery">🌴 Lush Greenery</option>
+                            <option value="village">🛕 Temple Ghat</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- =================================================================
+         MODALS (Decision Modals, Level Selector, Stats)
+         ================================================================= -->
+
+    <!-- Modal 1: Game 1 Puzzle Solved Decision Modal -->
+    <div id="puzzle-complete-modal" class="modal-backdrop">
+        <div class="modal-dialog">
+            <button class="modal-close-btn">&times;</button>
+            <div class="modal-header">
+                <div style="font-size: 40px; margin-bottom: 8px;">🎉 🪔 🌸</div>
+                <h2 id="pcm-title" class="modal-title">Level Completed!</h2>
+                <div id="pcm-stars" style="font-size: 24px; margin-bottom: 8px;">⭐⭐⭐</div>
+                <div id="pcm-stats" style="font-size: 0.95rem; color: #ffd700;"></div>
+                <div id="pcm-blessing" class="modal-blessing-quote"></div>
+            </div>
+
+            <!-- Decision Options -->
+            <div class="modal-decision-actions">
+                <button id="pcm-next-puzzle-btn" class="btn-primary-divine">
+                    🧩 Next Level ▶
+                </button>
+                <button id="pcm-replay-puzzle-btn" class="btn-secondary-divine">
+                    🔄 Replay
+                </button>
+                <button id="pcm-roadmap-puzzle-btn" class="btn-secondary-divine">
+                    🗺️ Road Map
+                </button>
+                <button id="pcm-visarjan-btn" class="btn-primary-divine" style="background: linear-gradient(135deg, #0288d1, #01579b);">
+                    🌊 Divine Immersion →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Game 2 Coloring Finished Decision Modal -->
+    <div id="dressup-complete-modal" class="modal-backdrop">
+        <div class="modal-dialog">
+            <button class="modal-close-btn">&times;</button>
+            <div class="modal-header">
+                <div style="font-size: 40px; margin-bottom: 8px;">🎨 🌺 ✨</div>
+                <h2 id="dcm-title" class="modal-title">Murti Painting Completed!</h2>
+                <div id="dcm-stats" style="font-size: 0.95rem; color: #ffd700;"></div>
+                <div id="dcm-blessing" class="modal-blessing-quote"></div>
+            </div>
+
+            <!-- Decision Options -->
+            <div class="modal-decision-actions">
+                <button id="dcm-next-dressup-btn" class="btn-primary-divine">
+                    🎨 Next Murti ▶
+                </button>
+                <button id="dcm-replay-dressup-btn" class="btn-secondary-divine">
+                    🔄 Replay / Repaint
+                </button>
+                <button id="dcm-roadmap-dressup-btn" class="btn-secondary-divine">
+                    🗺️ Road Map
+                </button>
+                <button id="dcm-visarjan-btn" class="btn-primary-divine" style="background: linear-gradient(135deg, #0288d1, #01579b);">
+                    🌊 Painted Murti Immersion →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         CANDY CRUSH STYLE LEVEL COMPLETE VICTORY SCORE CARD (Root Overlay)
+         ========================================================= -->
+    <div id="nimarjanam-candy-modal" class="candy-modal-backdrop" aria-hidden="true">
+        <div class="candy-victory-card">
+            <!-- Animated Radiant Background Beams -->
+            <div class="candy-rays-bg" aria-hidden="true"></div>
+
+            <!-- Golden Ribbon Top Header -->
+            <div class="candy-header-ribbon">
+                <div class="candy-ribbon-content">
+                    <span class="candy-sparkle">✨</span>
+                    <h2 id="candy-level-title" class="candy-level-title">LEVEL 1 COMPLETE!</h2>
+                    <span class="candy-sparkle">✨</span>
+                </div>
+                <p class="candy-level-sub">Ganapati Bappa Morya! Divine Immersion Complete!</p>
+            </div>
+
+            <!-- 3 Stars Container (Pop-in animations) -->
+            <div class="candy-stars-row">
+                <div class="candy-star-slot" id="candyStarSlot1">
+                    <div class="candy-star-star">★</div>
+                    <span class="candy-star-glow"></span>
+                </div>
+                <div class="candy-star-slot center-star" id="candyStarSlot2">
+                    <div class="candy-star-star">★</div>
+                    <span class="candy-star-glow"></span>
+                </div>
+                <div class="candy-star-slot" id="candyStarSlot3">
+                    <div class="candy-star-star">★</div>
+                    <span class="candy-star-glow"></span>
+                </div>
+            </div>
+
+            <!-- Rolling Score Hero -->
+            <div class="candy-score-display">
+                <div class="candy-score-label">TOTAL LEVEL SCORE</div>
+                <div class="candy-score-number" id="candyTotalScore">0</div>
+                <div id="candyNewBestBadge" class="candy-new-best" style="display: none;">🔥 NEW RECORD! 🔥</div>
+            </div>
+
+            <!-- Detailed Stats Breakdown Card -->
+            <div class="candy-breakdown-card">
+                <div class="candy-stat-row">
+                    <span class="csr-label"><span class="csr-icon">🛕</span> Idols Immersed</span>
+                    <span class="csr-val" id="candyIdolsStat">1 / 1 ✅</span>
+                </div>
+                <div class="candy-stat-row">
+                    <span class="csr-label"><span class="csr-icon">⏱️</span> Time Left Bonus</span>
+                    <span class="csr-val candy-bonus-pts" id="candyTimeBonusStat">+350 Pts</span>
+                </div>
+                <div class="candy-stat-row">
+                    <span class="csr-label"><span class="csr-icon">🟡</span> Bonus Laddus</span>
+                    <span class="csr-val candy-bonus-pts" id="candyLaddusStat">+100 Pts</span>
+                </div>
+                <div class="candy-stat-row candy-high-row">
+                    <span class="csr-label"><span class="csr-icon">👑</span> Level High Score</span>
+                    <span class="csr-val" id="candyHighScoreStat">1,450 Pts</span>
+                </div>
+            </div>
+
+            <!-- Candy Crush Style Action Buttons -->
+            <div class="candy-actions-row">
+                <button id="candyBtnReplay" class="btn-candy-secondary" title="Replay this level">
+                    🔄 Replay
+                </button>
+                <button id="candyBtnMap" class="btn-candy-map" title="View 500 Levels Road Map">
+                    🗺️ Road Map
+                </button>
+                <button id="candyBtnNext" class="btn-candy-primary" title="Start next level">
+                    Next Level ▶
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         TIME'S UP MODAL
+         ========================================================= -->
+    <div id="nimarjanam-timeout-modal" class="candy-modal-backdrop timeout-backdrop" aria-hidden="true">
+        <div class="candy-victory-card timeout-card">
+            <div class="candy-header-ribbon timeout-ribbon">
+                <div class="candy-ribbon-content">
+                    <span class="candy-sparkle">⏱️</span>
+                    <h2 class="candy-level-title">TIME'S UP!</h2>
+                    <span class="candy-sparkle">⏱️</span>
+                </div>
+                <p class="candy-level-sub">Time has run out! Try to immerse all sacred idols before the timer ends!</p>
+            </div>
+
+            <div class="candy-breakdown-card" style="margin-top: 15px;">
+                <div class="candy-stat-row">
+                    <span class="csr-label"><span class="csr-icon">🛕</span> Idols Immersed</span>
+                    <span class="csr-val" id="timeoutIdolsStat">0 / 1</span>
+                </div>
+                <div class="candy-stat-row">
+                    <span class="csr-label"><span class="csr-icon">🏆</span> Current Score</span>
+                    <span class="csr-val" id="timeoutScoreStat">125 Pts</span>
+                </div>
+            </div>
+
+            <div class="candy-actions-row" style="margin-top: 22px;">
+                <button id="timeoutBtnRetry" class="btn-candy-primary" title="Try Again">
+                    🔄 Retry Level
+                </button>
+                <button id="timeoutBtnMap" class="btn-candy-map" title="View 500 Levels Road Map">
+                    🗺️ Road Map
+                </button>
+                <button class="btn-candy-secondary nav-home-btn" title="Main Menu">
+                    🏠 Menu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: 500 Levels Candy Crush Style Road Map & Directory -->
+    <div id="level-selector-modal" class="modal-backdrop">
+        <div class="modal-dialog modal-dialog-wide">
+            <button class="modal-close-btn">&times;</button>
+            <div class="modal-header ls-modal-header">
+                <div class="ls-header-title-row">
+                    <h2 class="modal-title">🗺️ 500 Levels Festival Road Map</h2>
+                    <div class="ls-view-toggle">
+                        <button id="ls-btn-roadmap" class="btn-ls-toggle active" title="Candy Crush Road Map View">🗺️ Road Map</button>
+                        <button id="ls-btn-grid" class="btn-ls-toggle" title="Grid Directory View">🔲 Grid</button>
+                    </div>
+                </div>
+                <p class="ls-subtext">
+                    ⭐ Complete a level to unlock the next level. You can replay any unlocked level anytime!
+                </p>
+            </div>
+
+            <!-- 3 Section Tabs -->
+            <div class="ls-tabs-container">
+                <button class="ls-tab-btn active" data-mode="puzzle">🧩 1. Puzzle (1-500)</button>
+                <button class="ls-tab-btn" data-mode="dressup">🎨 2. Murti Coloring (1-500)</button>
+                <button class="ls-tab-btn" data-mode="nimarjanam">🌊 3. Visarjan (1-500)</button>
+            </div>
+
+            <!-- Search & Quick Navigation Bar -->
+            <div class="ls-controls-bar">
+                <input type="text" id="ls-search-input" class="ls-search-bar" placeholder="🔍 Search level number (e.g. 1, 25, Siddhivinayak, Marble)...">
+                <button id="ls-btn-jump-current" class="btn-jump-current" title="Jump to Current Level">
+                    📍 Current Level
+                </button>
+            </div>
+
+            <!-- View 1: Candy Crush Style Serpentine Road Map View -->
+            <div id="candy-road-map-container" class="candy-road-map-container">
+                <svg id="candy-road-svg" class="candy-road-svg"></svg>
+                <div id="candy-road-nodes-wrapper" class="candy-road-nodes-wrapper">
+                    <!-- Dynamically populated 500 winding level nodes -->
+                </div>
+            </div>
+
+            <!-- View 2: Compact Directory Grid View -->
+            <div id="level-selector-grid" class="level-selector-grid" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- Modal 4: Stats & Achievements Modal -->
+    <div id="stats-modal" class="modal-backdrop">
+        <div class="modal-dialog">
+            <button class="modal-close-btn">&times;</button>
+            <div class="modal-header">
+                <h2 class="modal-title">🏆 Festival Achievements & Stats</h2>
+            </div>
+
+            <div class="festival-summary-bar" style="margin-bottom: 20px;">
+                <div class="fsb-stat-item">
+                    <div class="stat-label">Total Score</div>
+                    <div id="stats-total-score" class="stat-value">0</div>
+                </div>
+                <div class="fsb-stat-item">
+                    <div class="stat-label">Total Stars</div>
+                    <div id="stats-total-stars" class="stat-value">0 ⭐</div>
+                </div>
+                <div class="fsb-stat-item">
+                    <div class="stat-label">Puzzles</div>
+                    <div id="stats-puzzles-count" class="stat-value">0 / 500</div>
+                </div>
+                <div class="fsb-stat-item">
+                    <div class="stat-label">Painted Murtis</div>
+                    <div id="stats-dressups-count" class="stat-value">0 / 500</div>
+                </div>
+                <div class="fsb-stat-item">
+                    <div class="stat-label">Visarjans</div>
+                    <div id="stats-immersions-count" class="stat-value">0 / 500</div>
+                </div>
+            </div>
+
+            <h4 style="color: var(--color-gold-light); margin-bottom: 12px; font-family: var(--font-heading);">Sacred Milestones Unlocked</h4>
+            <ul id="stats-achievements-list" style="list-style: none; display: flex; flex-direction: column; gap: 8px; max-height: 200px; overflow-y: auto;"></ul>
+        </div>
+    </div>
+
+    <!-- Global Persistent Puzzle Drag Layer (Guarantees zero clipping and smooth floating attached to cursor) -->
+    <div id="puzzle-drag-layer"></div>
+
+    <!-- Application Script Bundles (Pure Vanilla JS, Zero External Dependencies) -->
+    <script src="js/audio.js?v=5.8"></script>
+    <script src="js/ganeshaData.js?v=5.8"></script>
+    <script src="js/murtiRenderer.js?v=5.8"></script>
+    <script src="js/progressTracker.js?v=5.8"></script>
+    <script src="js/puzzleGame.js?v=5.8"></script>
+    <script src="js/coloringGame.js?v=5.8"></script>
+    <script src="js/nimarjanamGame.js?v=5.8"></script>
+    <script src="js/main.js?v=5.8"></script>
+</body>
+</html>
