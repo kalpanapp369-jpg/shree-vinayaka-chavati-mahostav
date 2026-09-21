@@ -120,6 +120,20 @@ class MainApp {
         // Sound effect on screen transition
         window.sacredAudio.playPieceSnap();
 
+        // Stop inactive game timers and hide modals
+        if (mode !== 'nimarjanam') {
+            if (window.nimarjanamGame) {
+                if (window.nimarjanamGame.stop) window.nimarjanamGame.stop();
+                else if (window.nimarjanamGame.stopTimer) window.nimarjanamGame.stopTimer();
+                if (window.nimarjanamGame.hideAllModals) window.nimarjanamGame.hideAllModals();
+            }
+        }
+        if (mode !== 'puzzle') {
+            if (window.puzzleGame && window.puzzleGame.stopTimer) {
+                window.puzzleGame.stopTimer();
+            }
+        }
+
         if (mode === 'menu') {
             const menuEl = document.getElementById('screen-menu');
             if (menuEl) menuEl.classList.add('active-screen');

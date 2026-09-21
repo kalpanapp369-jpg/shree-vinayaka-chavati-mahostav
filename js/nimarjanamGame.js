@@ -150,7 +150,6 @@ class NimarjanamGame {
         this.initEnvironmentParticles();
         this.spawnBonusLaddus();
         this.bindControls();
-        this.startTimer();
         this.startRenderLoop();
         this.updateContextActionButton();
 
@@ -591,11 +590,38 @@ class NimarjanamGame {
         }
     }
 
+    stopTimer() {
+        if (this.timerInterval) {
+            clearInterval(this.timerInterval);
+            this.timerInterval = null;
+        }
+    }
+
+    stop() {
+        this.stopTimer();
+        this.hideAllModals();
+        if (this.keyHoldInterval) {
+            clearInterval(this.keyHoldInterval);
+            this.keyHoldInterval = null;
+        }
+    }
+
     startTimer() {
-        if (this.timerInterval) clearInterval(this.timerInterval);
+        this.stopTimer();
+        // Guard: NEVER run timer if user is in coloring (dressup), puzzle, or menu!
+        if (window.mainApp && window.mainApp.currentMode !== 'nimarjanam') {
+            return;
+        }
+
         this.updateTimerDisplay();
 
         this.timerInterval = setInterval(() => {
+            // Guard: if user switched away from nimarjanam, stop immediately
+            if (window.mainApp && window.mainApp.currentMode !== 'nimarjanam') {
+                this.stopTimer();
+                return;
+            }
+
             if (this.isLevelCompleted || this.isTimeUp) return;
 
             if (this.timerSeconds > 0) {
@@ -612,9 +638,15 @@ class NimarjanamGame {
     }
 
     handleTimeUp() {
+        // Guard: If user is not currently in nimarjanam, do not trigger timeout!
+        if (window.mainApp && window.mainApp.currentMode !== 'nimarjanam') {
+            this.stopTimer();
+            return;
+        }
+
         if (this.isTimeUp || this.isLevelCompleted) return;
         this.isTimeUp = true;
-        if (this.timerInterval) clearInterval(this.timerInterval);
+        this.stopTimer();
 
         const timerBadge = document.getElementById('hud-timer-badge');
         if (timerBadge) timerBadge.classList.remove('timer-urgent');
@@ -627,6 +659,11 @@ class NimarjanamGame {
     }
 
     showTimeoutModal() {
+        // Guard: Never show timeout modal outside of nimarjanam mode
+        if (window.mainApp && window.mainApp.currentMode !== 'nimarjanam') {
+            return;
+        }
+
         const modal = document.getElementById('nimarjanam-timeout-modal');
         const idolsStat = document.getElementById('timeoutIdolsStat');
         const scoreStat = document.getElementById('timeoutScoreStat');
